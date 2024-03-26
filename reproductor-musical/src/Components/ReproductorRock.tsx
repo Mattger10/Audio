@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Box, styled, Typography } from "@mui/material";
 import { FunctionComponent } from "react";
-import recomendado from "./recommended.json";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
@@ -36,30 +35,30 @@ const ReproductorRock: FunctionComponent<ReproductorRockProps> = ({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const progress = duration ? (currentTime / duration) * 100 : 0;
-  const [sliderValue, setSliderValue] = useState(0);
+  const [, setSliderValue] = useState(0);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const [isRepeatMode, setIsRepeatMode] = useState(false);
   const [isShuffleMode, setIsShuffleMode] = useState(false);
-  const [currentRandomIndex, setCurrentRandomIndex] = useState(-1);
+  const [, setCurrentRandomIndex] = useState(-1);
   const [volume, setVolume] = useState(100); 
-  const [isSliderVisible, setIsSliderVisible] = useState(false);
-  const sliderTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [isSliderVisible, ] = useState(false);
+
   const [isReproductorVisible, setIsReproductorVisible] = useState(true);
   const [isImageRotating, setIsImageRotating] = useState(false);
 
 
-  const handleVolumeIconMouseEnter = () => {
-    setIsSliderVisible(true);
-    if (sliderTimerRef.current) {
-      clearTimeout(sliderTimerRef.current);
-    }
-  };
+  // const handleVolumeIconMouseEnter = () => {
+  //   setIsSliderVisible(true);
+  //   if (sliderTimerRef.current) {
+  //     clearTimeout(sliderTimerRef.current);
+  //   }
+  // };
 
-  const handleVolumeIconMouseLeave = () => {
-    sliderTimerRef.current = setTimeout(() => {
-      setIsSliderVisible(false);
-    }, 5000);
-  };
+  // const handleVolumeIconMouseLeave = () => {
+  //   sliderTimerRef.current = setTimeout(() => {
+  //     setIsSliderVisible(false);
+  //   }, 5000);
+  // };
 
   const handleTimeUpdate = () => {
     if (audioRef.current) {
@@ -137,6 +136,7 @@ const ReproductorRock: FunctionComponent<ReproductorRockProps> = ({
     if (seleccionar) {
       playSelectedSong(seleccionar);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seleccionar]);
 
   const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -309,8 +309,8 @@ const ReproductorRock: FunctionComponent<ReproductorRockProps> = ({
                       setVolume(100); // Actualizar el estado del volumen
                     }
                   }}
-                  onMouseEnter={handleVolumeIconMouseEnter} // Manejar el evento onMouseEnter para mostrar el Slider
-                  onMouseLeave={handleVolumeIconMouseLeave} // Manejar el evento onMouseLeave para ocultar el Slider después de 5 segundos
+                  // onMouseEnter={handleVolumeIconMouseEnter} 
+                  // onMouseLeave={handleVolumeIconMouseLeave} 
                   sx={{
                     color: "#ccc",
                     position: "fixed",
@@ -332,8 +332,8 @@ const ReproductorRock: FunctionComponent<ReproductorRockProps> = ({
                       setVolume(0); // Actualizar el estado del volumen
                     }
                   }}
-                  onMouseEnter={handleVolumeIconMouseEnter} // Manejar el evento onMouseEnter para mostrar el Slider
-                  onMouseLeave={handleVolumeIconMouseLeave} // Manejar el evento onMouseLeave para ocultar el Slider después de 5 segundos
+                  // onMouseEnter={handleVolumeIconMouseEnter} 
+                  // onMouseLeave={handleVolumeIconMouseLeave} 
                   sx={{
                     color: "#ccc",
                     position: "fixed",
@@ -358,7 +358,7 @@ const ReproductorRock: FunctionComponent<ReproductorRockProps> = ({
                   }}
                   orientation="vertical"
                   value={volume}
-                  onChange={(e, newValue) => setVolume(newValue as number)}
+                  onChange={(_e, newValue) => setVolume(newValue as number)}
                   aria-labelledby="continuous-slider"
                   min={0}
                   max={100}

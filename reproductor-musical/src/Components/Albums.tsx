@@ -7,7 +7,7 @@ interface AlbumProps {
   toggleAlbumSongs: (albumName: string) => void;
 }
 
-const Album: React.FC<AlbumProps> = ({ selectedAlbum, toggleAlbumSongs }) => {
+const Album: React.FC<AlbumProps> = ({ selectedAlbum}) => {
   const album = albums.find((artist) => artist.name === selectedAlbum);
   const [selectedAlbumName, setSelectedAlbumName] = useState<string | null>(
     null

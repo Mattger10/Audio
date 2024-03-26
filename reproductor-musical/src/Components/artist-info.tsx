@@ -1,11 +1,7 @@
-import { Box, Button, Typography, styled } from "@mui/material";
-import { FunctionComponent, useState } from "react";
+import { Box, Typography, styled } from "@mui/material";
+import { FunctionComponent } from "react";
 import artistas from "./artists.json";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import SyncIcon from "@mui/icons-material/Sync";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
+
 
 
 interface ArtistInfoProps {

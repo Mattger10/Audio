@@ -1,6 +1,6 @@
-import { Box, styled } from "@mui/material";
-import { FunctionComponent, useState } from "react";
-import ResponsiveAppBar from "./ResponsiveAppBar";
+import {  styled } from "@mui/material";
+import { FunctionComponent, } from "react";
+
 import Favoritos from "./Favoritos";
 
 interface PagFavoritosProps {
@@ -10,11 +10,11 @@ interface PagFavoritosProps {
 const PagFavoritos: FunctionComponent<PagFavoritosProps> = ({
   handleSelect,
 }) => {
-  const [mostrarTabla, setMostrarTabla] = useState(true);
+  // const [mostrarTabla, setMostrarTabla] = useState(true);
 
-  const alternarMostrarTabla = () => {
-    setMostrarTabla((prevShowTable) => !prevShowTable);
-  };
+  // const alternarMostrarTabla = () => {
+  //   setMostrarTabla((prevShowTable) => !prevShowTable);
+  // };
 
   return (
     <Container>

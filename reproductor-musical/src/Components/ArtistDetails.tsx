@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import  { FunctionComponent} from "react";
 import { useParams } from "react-router-dom";
 import artistas from "./artists.json";
 import { Box, Button, Typography } from "@mui/material";
@@ -24,7 +24,6 @@ interface ArtistasDetailsProps {
 }
 
 const ArtistasDetails: FunctionComponent<ArtistasDetailsProps> = ({
-  onPlaySong,
   handleSelectSong,
 }) => {
   const { id } = useParams<{ id: string }>();

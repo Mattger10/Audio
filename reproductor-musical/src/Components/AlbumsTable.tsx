@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent } from "react";
 import albums from "./albums.json"
 
 interface AlbumsTableProps {
@@ -7,9 +7,7 @@ interface AlbumsTableProps {
 
 const AlbumsTable: FunctionComponent<AlbumsTableProps> = ({selectedAlbum}) => {
     const album = albums.find((artist) => artist.name === selectedAlbum);
-  const [selectedAlbumName, setSelectedAlbumName] = useState<string | null>(
-    null
-  );
+ 
 
   return (
     <div>

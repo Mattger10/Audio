@@ -1,10 +1,10 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { Box, styled, Typography } from "@mui/material";
 import RockNacionalData from "./Rocknacional.json";
 import RecomendadosData from "./recommended.json";
 import ArtistasData from "./artists.json";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import SearchIcon from "@mui/icons-material/Search";
+
 
 interface Song {
   songName: string;
@@ -41,7 +41,7 @@ const Search: FunctionComponent<SearchProps> = ({
   ];
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<Data[]>(allData);
-  const [songToPlay, setSongToPlay] = useState<string | null>(null);
+  const [, setSongToPlay] = useState<string | null>(null);
 
   const handleSearch = (term: string) => {
     if (term.trim() === "") {

@@ -1,16 +1,8 @@
 import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { Typography, Button, Box } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import ShareIcon from "@mui/icons-material/Share";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import recommendedData from "./recommended.json";
@@ -24,21 +16,12 @@ const Recommended: React.FunctionComponent<RecommendedProps> = ({
   handleSelectSong,
 }) => {
   const allSongs = recommendedData.find((songs) => songs.songs);
-  const songs = allSongs ? allSongs.songs : [];
-  const [seleccionarCancion, setSeleccionarCancion] = React.useState<
-    string | null
-  >(null);
+  // const songs = allSongs ? allSongs.songs : [];
   const [verTodasLasCanciones, setVerTodasLasCanciones] = React.useState(false);
-  const [showReproductor, setShowReproductor] = React.useState(false);
+  const [, setShowReproductor] = React.useState(false);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
   // Function to format artist names using Intl.ListFormat('es').format
-  const formatArtists = (artists: string[]) => {
-    const listFormat = new Intl.ListFormat("es", {
-      style: "long",
-      type: "conjunction",
-    });
-    return listFormat.format(artists);
-  };
+  
 
   const [favoritos, setFavoritos] = React.useState<string[]>(() => {
     // Recuperar el estado de favoritos del localStorage al cargar el componente
@@ -46,23 +29,23 @@ const Recommended: React.FunctionComponent<RecommendedProps> = ({
     return storedFavoritos ? JSON.parse(storedFavoritos) : [];
   });
 
-  const getShareUrl = (song: string) => {
-    // Aquí debes obtener la URL de la canción según la lógica de tu aplicación.
-    // Por ejemplo, si las canciones tienen una URL guardada en el objeto `song`, puedes hacer:
-    const selectedSong = songs.find((item) => item.songName === song);
-    return selectedSong ? selectedSong.song_url : "";
-  };
+  // const getShareUrl = (song: string) => {
+  //   // Aquí debes obtener la URL de la canción según la lógica de tu aplicación.
+  //   // Por ejemplo, si las canciones tienen una URL guardada en el objeto `song`, puedes hacer:
+  //   const selectedSong = songs.find((item) => item.songName === song);
+  //   return selectedSong ? selectedSong.song_url : "";
+  // };
 
-  const handleShareOnWhatsApp = (song: string) => {
-    const urlToShare = getShareUrl(song);
-    if (urlToShare) {
-      const textToShare = `Escucha esta canción: ${urlToShare}`;
-      const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(
-        textToShare
-      )}`;
-      window.open(whatsappShareUrl, "_blank");
-    }
-  };
+  // const handleShareOnWhatsApp = (song: string) => {
+  //   const urlToShare = getShareUrl(song);
+  //   if (urlToShare) {
+  //     const textToShare = `Escucha esta canción: ${urlToShare}`;
+  //     const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(
+  //       textToShare
+  //     )}`;
+  //     window.open(whatsappShareUrl, "_blank");
+  //   }
+  // };
 
   const handleToggleFavorito = (songName: string) => {
     if (favoritos.includes(songName)) {
@@ -91,13 +74,13 @@ const Recommended: React.FunctionComponent<RecommendedProps> = ({
           display: "flex",
           justifyContent: "center",
           paddingBottom: "5rem",
-          marginTop: "2rem",
+          marginTop: "0rem",
           width: "100%",
         }}
       >
         <Box
           sx={{
-            width: "80%",
+            width: "70%",
             "@media (max-width: 768px)": {
               width: "100%", //
             },

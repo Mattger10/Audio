@@ -1,10 +1,8 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import MusicPlayer from "./Components/index";
-import { useEffect, useState } from "react";
+
+import { useState } from "react";
 import Reproductor from "./Components/Reproductor";
 import ReproductorArtists from "./Components/ReproductorArtists";
-import ArtistsDetails from "./Components/ArtistDetails";
-import RockNacional from "./Components/RockNacional";
 import PagRockNacional from "./Components/PagRockNacional";
 import ReproductorRock from "./Components/ReproductorRock";
 import PagFavoritos from "./Components/pagFavoritos";
@@ -15,35 +13,96 @@ import artistas from "./Components/artists.json";
 import PagSearch from "./Components/pagSearch";
 import Recommended from "./Components/recommended";
 import ResponsiveAppBar from "./Components/ResponsiveAppBar";
-import ArtistsRow from "./Components/artist-slider";
 import Artistas from "./Components/artist-slider";
 import ArtistasDetails from "./Components/ArtistDetails";
 import styled from "styled-components";
 
 
+interface Song {
+  songName: string;
+  duration: string;
+  number: string;
+  artista: string;
+  artists_evolved: string[];
+  icon: string;
+  album: string;
+  song_url: string;
+}
+
+interface Data {
+  songs: Song[];
+  name?: string;
+  bio?: string;
+  photo_url?: string;
+
+}
 
 const App: React.FC = () => {
   const [seleccionarCancion, setSeleccionarCancion] = useState<string | null>(
     null
   );
   const [showReproductor, setShowReproductor] = useState(false);
-  const [selectedSong, setSelectedSong] = useState<string>("");
-  const [favoritos, setFavoritos] = useState<string[]>(() => {
+  const [, setSelectedSong] = useState<string>("");
+  const [favoritos, ] = useState<string[]>(() => {
     const storedFavoritos = localStorage.getItem("favoritos");
     return storedFavoritos ? JSON.parse(storedFavoritos) : [];
   });
 
-  const [showReproductorArtists, setShowReproductorArtists] = useState(false);
-  const [showReproductorRock, setShowReproductorRock] = useState(false);
-  const [showReproductorRecommended, setShowReproductorRecommended] =
+  const [, setShowReproductorArtists] = useState(false);
+  const [, setShowReproductorRock] = useState(false);
+  const [, setShowReproductorRecommended] =
     useState(false);
-  const [mostrarReproductor, setMostrarReproductor] = useState(false);
   const [mostrarReproductorFavoritos, setMostrarReproductorFavoritos] =
     useState(false);
-    const [currentSong, setCurrentSong] = useState<Song | null>(null);
+  const [, setCurrentSong] = useState<Song | null>(null);
+
+  const allData: Data[] = [...rocknacional, ...recommended, ...artistas];
+  const [, setSearchResults] = useState<Data[]>(allData);
+  const [searchTerm, setSearchTerm] = useState("");
 
 
-  const handleSelectSong = (song: string, url: string) => {
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+    if (term.trim() === "") {
+      setSearchResults(allData); // Mostrar todos los datos sin filtrar
+      return;
+    }
+  
+    // Conjunto para realizar un seguimiento de los nombres de las canciones únicas
+    const uniqueSongNames = new Set<string>();
+  
+    // Filtrar todas las canciones que coincidan con el término de búsqueda en todos los datos
+    const matchedSongs: Song[] = [];
+  
+    allData.forEach(data => {
+      data.songs.forEach(song => {
+        const lowerCaseSongName = song.songName.toLowerCase();
+        const lowerCaseArtista = song.artista?.toLowerCase() || "";
+        const lowerCaseArtistsEvolved = song.artists_evolved?.map(artist => artist.toLowerCase()) || [];
+        const searchTermLower = term.toLowerCase();
+  
+        const isArtistEvolvedMatch = lowerCaseArtistsEvolved.some(artist => artist.includes(searchTermLower));
+  
+        if (
+          (lowerCaseSongName.includes(searchTermLower) || lowerCaseArtista.includes(searchTermLower) || isArtistEvolvedMatch) &&
+          !uniqueSongNames.has(lowerCaseSongName)
+        ) {
+          uniqueSongNames.add(lowerCaseSongName); // Agregar el nombre de la canción al conjunto de canciones únicas
+          matchedSongs.push(song); // Agregar la canción al resultado si es única
+        }
+      });
+    });
+  
+    // Construir los resultados de búsqueda combinando las canciones coincidentes con sus datos respectivos
+    const combinedResults: Data[] = allData.map(data => ({
+      ...data,
+      songs: data.songs.filter(song => matchedSongs.includes(song))
+    })).filter(data => data.songs.length > 0);
+  
+    setSearchResults(combinedResults);
+  };
+
+  const handleSelectSong = (song: string) => {
     setSeleccionarCancion(song);
     setSelectedSong(song);
     setShowReproductor(true);
@@ -84,22 +143,21 @@ const App: React.FC = () => {
     setCurrentSong(song); // Establece la canción seleccionada
   };
 
-
-  
-
   return (
     <div>
       <Img />
-      <ResponsiveAppBar />
-      
+      <ResponsiveAppBar searchTerm={searchTerm} onSearch={handleSearch}/>
+
       <Routes>
+        <Route path="/" element={<Artistas />} />
         <Route
-          path="/"
-          element={<Artistas />}
-        />
-       <Route
           path="/artistas/:id"
-          element={<ArtistasDetails onPlaySong={handlePlaySong} handleSelectSong={handleSelectSong}/>}
+          element={
+            <ArtistasDetails
+              onPlaySong={handlePlaySong}
+              handleSelectSong={handleSelectSong}
+            />
+          }
         />
         <Route
           path="/rocknacional"
@@ -138,10 +196,7 @@ const App: React.FC = () => {
               onClose={handleCloseReproductor}
             />
 
-            <ReproductorArtists
-              seleccionar={seleccionarCancion}
-              onClose={handleCloseReproductor}
-            />
+            <ReproductorArtists seleccionar={seleccionarCancion} />
 
             <ReproductorRock
               seleccionar={seleccionarCancion}

@@ -10,11 +10,11 @@ import { Typography, styled, Button, Box } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import ShareIcon from "@mui/icons-material/Share";
+
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import artistas from "./artists.json";
-import ReproductorArtists from "./ReproductorArtists";
+
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 
@@ -31,10 +31,10 @@ const MusicTable: React.FunctionComponent<MusicTableProps> = ({
     (songs) => songs.name === seleccionar
   );
   const songs = seleccionarArtista ? seleccionarArtista.songs : [];
-  const name = seleccionarArtista ? seleccionarArtista.name : "";
+
   const rows = songs;
   const [verTodasLasCanciones, setVerTodasLasCanciones] = React.useState(false);
-  const [showReproductor, setShowReproductor] = React.useState(false);
+  const [, setShowReproductor] = React.useState(false);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
   const [favoritos, setFavoritos] = React.useState<string[]>(() => {
     // Recuperar el estado de favoritos del localStorage al cargar el componente

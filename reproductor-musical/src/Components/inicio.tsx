@@ -1,32 +1,19 @@
-import { FunctionComponent, useState } from "react";
-import { Box, styled } from "@mui/material";
-import ArtistsRow from "./artist-slider";
-import ResponsiveAppBar from "./ResponsiveAppBar";
+import { FunctionComponent, } from "react";
+import { styled } from "@mui/material";
+
 
 interface InicioProps {}
 
 const Inicio: FunctionComponent<InicioProps> = () => {
-  const [selectedArtist, setSelectedArtist] = useState<string>("");
-  const [mostrarTabla, setMostrarTabla] = useState(false);
 
-  const handleImageClick = (name: string) => {
-    setSelectedArtist(name);
-  };
 
-  const alternarMostrarTabla = () => {
-    setMostrarTabla((prevMostrarTabla) => !prevMostrarTabla);
-  };
+
 
   return (
     <Container>
       <Img />
-      <ResponsiveAppBar
-        mostrarTabla={mostrarTabla}
-        alternarMostrarTabla={alternarMostrarTabla}
-      />
-      <Box sx={{ padding: 5 }}>
-        <ArtistsRow onImageClick={handleImageClick} />
-      </Box>
+     
+   
     </Container>
   );
 };

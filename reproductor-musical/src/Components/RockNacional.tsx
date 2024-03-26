@@ -1,21 +1,17 @@
 import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { Typography, styled, Button, Box } from "@mui/material";
+
+import { Typography, Button, Box } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import ShareIcon from "@mui/icons-material/Share";
+
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import recommendedData from "./recommended.json";
+
 import rocknacional from "./Rocknacional.json";
-import Favoritos from "./Favoritos";
+
+import styled from "styled-components";
+
 
 interface RockNacionalProps {
   mostrarTabla: boolean;
@@ -23,22 +19,16 @@ interface RockNacionalProps {
 }
 
 const RockNacional: React.FunctionComponent<RockNacionalProps> = ({
-  mostrarTabla,
+
   handleSelectSong,
 }) => {
   const allSongs = rocknacional.find((songs) => songs.songs);
-  const songs = allSongs ? allSongs.songs : [];
+
   const [verTodasLasCanciones, setVerTodasLasCanciones] = React.useState(false);
-  const [showReproductorRock, setShowReproductorRock] = React.useState(false);
+  const [, setShowReproductorRock] = React.useState(false);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
   // Function to format artist names using Intl.ListFormat('es').format
-  const formatArtists = (artists: string[]) => {
-    const listFormat = new Intl.ListFormat("es", {
-      style: "long",
-      type: "conjunction",
-    });
-    return listFormat.format(artists);
-  };
+  
 
   const [favoritos, setFavoritos] = React.useState<string[]>(() => {
     // Recuperar el estado de favoritos del localStorage al cargar el componente
@@ -72,177 +62,154 @@ const RockNacional: React.FunctionComponent<RockNacionalProps> = ({
           display: "flex",
           justifyContent: "center",
           paddingBottom: "5rem",
-          marginTop: "2rem",
+          marginTop: "0rem",
+          width: "100%",
         }}
       >
-        {mostrarTabla ? (
-          <TableContainer
-            component={Paper}
-            sx={{
-              width: "80%",
-              padding: "0px",
-              backgroundColor: "transparent",
-              border: "1px solid white",
-              "@media screen and (max-width: 768px)": {
-                width: "100%",
-              },
-            }}
-          >
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>
-                    <Typography sx={{ color: "white" }}>#</Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography sx={{ color: "white" }}>CANCIONES</Typography>
-                  </TableCell>
-                  <TableCell align="left">
-                    <Typography sx={{ color: "white" }}>ARTISTA</Typography>
-                  </TableCell>
-                  <TableCell align="left">
-                    {" "}
-                    <Typography sx={{ color: "white" }}>ALBUM</Typography>
-                  </TableCell>
-                  <TableCell align="right">
-                    {" "}
-                    <Typography sx={{ color: "white" }}>DURACIÓN</Typography>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rocknacional[0].songs.map((song, index) => {
-                  return verTodasLasCanciones || index < 10 ? (
-                    <TableRow
+        <Box
+          sx={{
+            width: "70%",
+            "@media (max-width: 768px)": {
+              width: "100%", //
+            },
+          }}
+        >
+          {rocknacional[0].songs.map((song, index) => {
+            return verTodasLasCanciones || index < 10 ? (
+              <StyledList key={index}>
+                <StyledListItem key={index}>
+                  <StyledImage src={song.icon} alt="" />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between", // Agregamos esto para colocar el icono a la derecha
+                      alignItems: "center", // Mantenemos la alineación vertical al centro
+                      width: "90%", // Establecemos el ancho completo para ocupar toda la fila
+                    }}
+                  >
+                    <Box sx={{ display: "flex", flexDirection: "column", paddingTop: "10px", paddingBottom: "10px" }}>
+                      <Typography
+                        sx={{
+                          color: "#ccc",
+                          fontSize: "25px",
+                          "@media screen and (max-width: 768px)": {
+                            fontSize: "14px",
+                          },
+                        }}
+                      >
+                        {song.songName}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: "#ccc",
+                          fontSize: "15px",
+                          
+                          "@media screen and (max-width: 768px)": {
+                            fontSize: "10px",
+                          },
+                        }}
+                      >
+                        {song.artista}
+                      </Typography>
+                    </Box>
+                    <Box
                       sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                     >
-                      <TableCell component="th" scope="row">
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                          <ImgIcon
-                            width={40}
-                            height={40}
-                            src={song.icon}
-                            alt=""
-                          />
-                          <Typography
-                            sx={{
-                              marginLeft: "2rem",
-                              marginTop: "0rem",
-                              color: "white",
-                            }}
-                          >
-                            {song.number}
-                          </Typography>
-
-                          {favoritos.includes(song.songName) ? (
-                            <FavoriteIcon
-                            color="secondary"
-                            sx={{
-                              marginLeft: "1.5rem",
-                              color: "#ffee04",
-                              cursor: "pointer",
-                              fontSize: 20,
-                            }}
-                              onClick={() =>
-                                handleToggleFavorito(song.songName)
-                              }
-                            />
-                          ) : (
-                            <FavoriteBorderIcon
-                            color="secondary"
-                            sx={{
-                              marginLeft: "1.5rem",
-                              color: "#ccc",
-                              cursor: "pointer",
-                              fontSize: 20,
-                            }}
-                              onClick={() =>
-                                handleToggleFavorito(song.songName)
-                              }
-                            />
-                          )}
-
-                          <PlayCircleOutlineIcon
-                             sx={{
-                              marginLeft: "2rem",
-                              cursor: "pointer",
-                              fontSize: 20,
-                              color: "white",
-                              "&:hover": {
-                                color: "#ffee04", // Cambiar el color a tu preferencia cuando el cursor esté sobre el ícono
-                              },
-                            }}
-                            onClick={() =>
-                              handlePlayPause(
-                                song.song_url,
-                                song.songName,
-                                index
-                              )
-                            }
-                          />
-                          <audio
-                            ref={audioRef}
-                            controls
-                            style={{ display: "none" }}
-                          ></audio>
-                        </Box>
-                      </TableCell>
-                      <TableCell align="left" sx={{ color: "white" }}>
-                      {song.songName}
-                    </TableCell>
-                    <TableCell align="left" sx={{ color: "white" }}>
-                      {song.artista}
-                    </TableCell>
-                    <TableCell align="left" sx={{ color: "white" }}>
-                      {song.album}
-                    </TableCell>
-                    <TableCell align="right" sx={{ color: "white" }}>
-                      {song.duration}
-                    </TableCell>
-                    </TableRow>
-                  ) : null;
-                })}
-              </TableBody>
-            </Table>
-
-            <ContainerButton>
-              {songs.length > 5 ? (
-                <StyledButton
-                  onClick={() => setVerTodasLasCanciones(!verTodasLasCanciones)}
-                  sx={{ marginTop: "1rem" }}
-                >
-                  {verTodasLasCanciones ? (
-                    <Typography sx={{ letterSpacing: "0.2rem" }}>
-                      Mostrar menos
-                      <KeyboardArrowUpIcon
+                      {favoritos.includes(song.songName) ? (
+                        <FavoriteIcon
+                          color="secondary"
+                          sx={{
+                            marginLeft: "1.5rem",
+                            color: "#ffee04",
+                            cursor: "pointer",
+                            fontSize: "35px",
+                            "@media (max-width: 768px)": {
+                              fontSize: "25px",
+                            },
+                          }}
+                          onClick={() => handleToggleFavorito(song.songName)}
+                        />
+                      ) : (
+                        <FavoriteBorderIcon
+                          color="secondary"
+                          sx={{
+                            marginLeft: "1.5rem",
+                            color: "#ccc",
+                            cursor: "pointer",
+                            fontSize: "35px",
+                            "@media (max-width: 768px)": {
+                              fontSize: "25px",
+                            },
+                          }}
+                          onClick={() => handleToggleFavorito(song.songName)}
+                        />
+                      )}
+                      <PlayCircleOutlineIcon
+                        onClick={() =>
+                          handlePlayPause(song.song_url, song.songName, index)
+                        }
                         sx={{
-                          position: "absolute",
-                          marginLeft: "0.5rem",
-                          marginTop: "-0.1rem",
-                          fontSize: 25,
+                          marginLeft: "2rem",
+                          cursor: "pointer",
+                          fontSize: "35px",
+                          color: "white",
+                          "&:hover": {
+                            color: "#ffee04", // Cambiar el color a tu preferencia cuando el cursor esté sobre el ícono
+                          },
+                          "@media (max-width: 768px)": {
+                            fontSize: "25px",
+                          },
                         }}
                       />
-                    </Typography>
-                  ) : (
-                    <Typography sx={{ letterSpacing: "0.2rem" }}>
-                      Mostrar más
-                      <KeyboardArrowDownIcon
-                        sx={{
-                          position: "absolute",
-                          marginLeft: "0.5rem",
-                          marginTop: "-0.1rem",
-                          fontSize: 25,
-                        }}
-                      />
-                    </Typography>
-                  )}
-                </StyledButton>
-              ) : null}
-            </ContainerButton>
-          </TableContainer>
-        ) : null}
+                    </Box>
+                  </Box>
+                  <audio
+                    ref={audioRef}
+                    controls
+                    style={{ display: "none" }}
+                  ></audio>
+                </StyledListItem>
+              </StyledList>
+            ) : null;
+          })}
+          <ContainerButton>
+            <StyledButton
+              onClick={() => setVerTodasLasCanciones(!verTodasLasCanciones)}
+              sx={{ marginTop: "1rem" }}
+            >
+              {verTodasLasCanciones ? (
+                <Typography sx={{ letterSpacing: "0.2rem" }}>
+                  Mostrar menos
+                  <KeyboardArrowUpIcon
+                    sx={{
+                      position: "absolute",
+                      marginLeft: "0.5rem",
+                      marginTop: "-0.1rem",
+                      fontSize: 25,
+                    }}
+                  />
+                </Typography>
+              ) : (
+                <Typography sx={{ letterSpacing: "0.2rem" }}>
+                  Mostrar más
+                  <KeyboardArrowDownIcon
+                    sx={{
+                      position: "absolute",
+                      marginLeft: "0.5rem",
+                      marginTop: "-0.1rem",
+                      fontSize: 25,
+                    }}
+                  />
+                </Typography>
+              )}
+            </StyledButton>
+          </ContainerButton>
+        </Box>
       </Box>
     );
   } else {
@@ -252,7 +219,7 @@ const RockNacional: React.FunctionComponent<RockNacionalProps> = ({
 
 export default RockNacional;
 
-const ImgIcon = styled("img")(() => ({}));
+
 
 const StyledButton = styled(Button)(() => ({
   color: "#fff",
@@ -267,6 +234,42 @@ const ContainerButton = styled("div")(() => ({
   marginBottom: "5rem",
 }));
 
-const Container = styled("div")(() => ({
-  marginBottom: "10rem",
-}));
+
+
+
+const StyledImage = styled.img`
+  width: 50px;
+  height: 50px; /* Ajusta el valor según sea necesario */
+  margin-right: 30px; /* Espacio entre la imagen y el texto */
+  border-radius: 5px; 
+  @media screen and (max-width: 768px) {
+    width: 35px;
+  height: 35px; /* Ajusta el valor según sea necesario */
+  },
+`;
+
+const StyledList = styled.ul`
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar elementos horizontalmente */
+`;
+
+const StyledListItem = styled.li`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+  padding: 20px; /* Ajusta el valor según sea necesario */
+  padding-left: 30px;
+  border: 1px solid #ccc;
+  border-radius: 20px; 
+  
+  @media screen and (max-width: 768px) {
+    width: 85%;
+    padding-left: 10px;
+    height: 1rem;
+  },
+`;
+

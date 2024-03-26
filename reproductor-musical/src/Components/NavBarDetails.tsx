@@ -1,18 +1,13 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import { Typography, Button, styled } from "@mui/material";
+import {  Button, styled } from "@mui/material";
 import Container from "@mui/material/Container";
-import { Link } from "react-router-dom";
+
 import recommendedData from "./recommended.json";
-import SearchIcon from "@mui/icons-material/Search";
+
 import artistas from "./artists.json";
-import albums from "./albums.json";
-import MusicTable from "./music-table";
-import Album from "./Albums";
-import ArtistsRow from "./artist-slider";
-import ArtistsDetails from "./ArtistDetails";
-import ArtistInfo from "./artist-info";
+
 
 interface NavBarDetailsProps {
   seleccionar: string;
@@ -23,34 +18,33 @@ interface NavBarDetailsProps {
 
 const NavBarDetails: React.FunctionComponent<NavBarDetailsProps> = ({
   seleccionar,
-  handleSelectSong,
-  toggleAlbumSongs,
+
   handleShowOverview
 }) => {
   const seleccionarArtista = artistas.find(
     (artista) => artista.name === seleccionar
   );
-  const [showAlbumSongs, setShowAlbumSongs] = React.useState(false);
-  const [selectedArtist, setSelectedArtist] = React.useState<string>("");
-  const [selectedAlbum, setSelectedAlbum] = React.useState<string | null>(null);
-  const [showMusicTable, setShowMusicTable] = React.useState(false);
-  const [initialAlbumShown, setInitialAlbumShown] = React.useState(false); // New state
+  // const [showAlbumSongs, setShowAlbumSongs] = React.useState(false);
+  // const [selectedArtist, setSelectedArtist] = React.useState<string>("");
+  // const [selectedAlbum, setSelectedAlbum] = React.useState<string | null>(null);
+  // const [showMusicTable, setShowMusicTable] = React.useState(false);
+  // const [initialAlbumShown, setInitialAlbumShown] = React.useState(false); // New state
 
-  const toggleAlbumSongs1 = (albumName: string) => {
-    setSelectedAlbum(albumName);
-    setInitialAlbumShown(true);
-    setShowAlbumSongs(true); // Set showAlbumSongs to true when showing Album
-  };
+  // const toggleAlbumSongs1 = (albumName: string) => {
+  //   setSelectedAlbum(albumName);
+  //   setInitialAlbumShown(true);
+  //   setShowAlbumSongs(true); // Set showAlbumSongs to true when showing Album
+  // };
 
-  const handleShowOverview1 = () => {
-    setShowAlbumSongs(false); // Hide Album when showing Overview
-    setShowMusicTable(true); // Show MusicTable when showing Overview
-    setSelectedAlbum(null); // Reset selected album when showing Overview
-  };
+  // const handleShowOverview1 = () => {
+  //   setShowAlbumSongs(false); // Hide Album when showing Overview
+  //   setShowMusicTable(true); // Show MusicTable when showing Overview
+  //   setSelectedAlbum(null); // Reset selected album when showing Overview
+  // };
 
-  const handleImageClick = (name: string) => {
-    setSelectedArtist(name);
-  };
+  // const handleImageClick = (name: string) => {
+  //   setSelectedArtist(name);
+  // };
 
   if (seleccionarArtista) {
     return (

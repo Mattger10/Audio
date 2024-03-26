@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import artistas from "./artists.json";
 import { Box, Typography, styled } from "@mui/material";
 import { Link } from "react-router-dom";

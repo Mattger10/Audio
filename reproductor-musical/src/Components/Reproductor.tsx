@@ -36,30 +36,19 @@ const Reproductor: FunctionComponent<ReproductorProps> = ({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const progress = duration ? (currentTime / duration) * 100 : 0;
-  const [sliderValue, setSliderValue] = useState(0);
+  const [, setSliderValue] = useState(0);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const [isRepeatMode, setIsRepeatMode] = useState(false);
   const [isShuffleMode, setIsShuffleMode] = useState(false);
-  const [currentRandomIndex, setCurrentRandomIndex] = useState(-1);
+  const [, setCurrentRandomIndex] = useState(-1);
   const [volume, setVolume] = useState(100);
-  const [isSliderVisible, setIsSliderVisible] = useState(false);
-  const sliderTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [isSliderVisible, ] = useState(false);
+
   const [isReproductorVisible, setIsReproductorVisible] = useState(true);
   const [showLyrics, setShowLyrics] = useState(false);
   const [isImageRotating, setIsImageRotating] = useState(false);
 
-  const handleVolumeIconMouseEnter = () => {
-    setIsSliderVisible(true);
-    if (sliderTimerRef.current) {
-      clearTimeout(sliderTimerRef.current);
-    }
-  };
-
-  const handleVolumeIconMouseLeave = () => {
-    sliderTimerRef.current = setTimeout(() => {
-      setIsSliderVisible(false);
-    }, 5000);
-  };
+ 
 
   const handleTimeUpdate = () => {
     if (audioRef.current) {
@@ -136,6 +125,7 @@ const Reproductor: FunctionComponent<ReproductorProps> = ({
     if (seleccionar) {
       playSelectedSong(seleccionar);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seleccionar]);
 
   const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -165,7 +155,7 @@ const Reproductor: FunctionComponent<ReproductorProps> = ({
   const currentSongData = songs[currentSongIndex];
 
   if (currentSongData && isReproductorVisible) {
-    const { songName, icon, artists_evolved } = currentSongData;
+   
 
     return (
       <div>
@@ -403,8 +393,7 @@ const Reproductor: FunctionComponent<ReproductorProps> = ({
                         setVolume(100);
                       }
                     }}
-                    onMouseEnter={handleVolumeIconMouseEnter}
-                    onMouseLeave={handleVolumeIconMouseLeave}
+                    
                     sx={{
                       color: "#ccc",
                       position: "fixed",
@@ -426,8 +415,7 @@ const Reproductor: FunctionComponent<ReproductorProps> = ({
                         setVolume(0);
                       }
                     }}
-                    onMouseEnter={handleVolumeIconMouseEnter}
-                    onMouseLeave={handleVolumeIconMouseLeave}
+                   
                     sx={{
                       color: "#ccc",
                       position: "fixed",
@@ -452,7 +440,7 @@ const Reproductor: FunctionComponent<ReproductorProps> = ({
                     }}
                     orientation="vertical"
                     value={volume}
-                    onChange={(e, newValue) => setVolume(newValue as number)}
+                    onChange={(_e, newValue) => setVolume(newValue as number)}
                     aria-labelledby="continuous-slider"
                     min={0}
                     max={100}

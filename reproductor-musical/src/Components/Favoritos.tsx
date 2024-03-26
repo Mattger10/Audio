@@ -6,11 +6,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Typography, styled, Button, Box } from "@mui/material";
+import { Typography, styled, Box } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import ShareIcon from "@mui/icons-material/Share";
 import rocknacional from "./Rocknacional.json";
 import recommended from "./recommended.json";
 import artistas from "./artists.json";
@@ -33,9 +32,9 @@ interface FavoritosProps {
 
 const Favoritos: React.FunctionComponent<FavoritosProps> = ({
   handleSelect,
-  mostrarTabla,
+ 
 }) => {
-  const [selectedSong, setSelectedSong] = React.useState<string | null>(null);
+
   const [favoritos, setFavoritos] = React.useState<string[]>(() => {
     const storedFavoritos = localStorage.getItem("favoritos");
     return storedFavoritos ? JSON.parse(storedFavoritos) : [];
@@ -66,7 +65,7 @@ const Favoritos: React.FunctionComponent<FavoritosProps> = ({
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
   }, [favoritos]);
 
-  const [mostrarReproductorFavoritos, setMostrarReproductorFavoritos] =
+  const [, setMostrarReproductorFavoritos] =
     React.useState(false);
 
   const handlePlayPause = (song: string) => {
@@ -74,9 +73,6 @@ const Favoritos: React.FunctionComponent<FavoritosProps> = ({
     setMostrarReproductorFavoritos(true);
   };
 
-  const handleCloseReproductor = () => {
-    setMostrarReproductorFavoritos(false);
-  };
 
   if (cancionesFavoritas.length === 0) {
     return (

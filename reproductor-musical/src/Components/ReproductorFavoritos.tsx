@@ -25,16 +25,16 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5); // Estado para controlar el volumen
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isSliderVisible, setIsSliderVisible] = useState(false);
-  const sliderTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [isSliderVisible, ] = useState(false);
+
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const progress = duration ? (currentTime / duration) * 100 : 0;
-  const [sliderValue, setSliderValue] = useState(0);
+  const [, setSliderValue] = useState(0);
   const [isShuffleMode, setIsShuffleMode] = useState(false);
   const [isRepeatMode, setIsRepeatMode] = useState(false);
   const [autoPlayNext, setAutoPlayNext] = useState(false);
-  const [currentRandomIndex, setCurrentRandomIndex] = useState(-1);
+  const [, setCurrentRandomIndex] = useState(-1);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const [isReproductorVisible, setIsReproductorVisible] = useState(true);
   const [isImageRotating, setIsImageRotating] = useState(false);
@@ -45,18 +45,18 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
     return cancionesFavoritas.findIndex((song) => song.song_url === songName);
   };
 
-  const handleVolumeIconMouseEnter = () => {
-    setIsSliderVisible(true);
-    if (sliderTimerRef.current) {
-      clearTimeout(sliderTimerRef.current);
-    }
-  };
+  // const handleVolumeIconMouseEnter = () => {
+  //   setIsSliderVisible(true);
+  //   if (sliderTimerRef.current) {
+  //     clearTimeout(sliderTimerRef.current);
+  //   }
+  // };
 
-  const handleVolumeIconMouseLeave = () => {
-    sliderTimerRef.current = setTimeout(() => {
-      setIsSliderVisible(false);
-    }, 5000);
-  };
+  // const handleVolumeIconMouseLeave = () => {
+  //   sliderTimerRef.current = setTimeout(() => {
+  //     setIsSliderVisible(false);
+  //   }, 5000);
+  // };
 
   const handleTimeUpdate = () => {
     if (audioRef.current) {
@@ -137,6 +137,7 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
     if (seleccionarCancion) {
       playSelectedSong(seleccionarCancion);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seleccionarCancion]);
 
 
@@ -307,8 +308,8 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
                     setVolume(100); // Actualizar el estado del volumen
                   }
                 }}
-                onMouseEnter={handleVolumeIconMouseEnter} // Manejar el evento onMouseEnter para mostrar el Slider
-                onMouseLeave={handleVolumeIconMouseLeave} // Manejar el evento onMouseLeave para ocultar el Slider después de 5 segundos
+                // onMouseEnter={handleVolumeIconMouseEnter} 
+                // onMouseLeave={handleVolumeIconMouseLeave} 
                 sx={{
                   color: "#ccc",
                   position: "fixed",
@@ -330,8 +331,8 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
                     setVolume(0); // Actualizar el estado del volumen
                   }
                 }}
-                onMouseEnter={handleVolumeIconMouseEnter} // Manejar el evento onMouseEnter para mostrar el Slider
-                onMouseLeave={handleVolumeIconMouseLeave} // Manejar el evento onMouseLeave para ocultar el Slider después de 5 segundos
+                // onMouseEnter={handleVolumeIconMouseEnter} 
+                // onMouseLeave={handleVolumeIconMouseLeave} 
                 sx={{
                   color: "#ccc",
                   position: "fixed",
@@ -356,7 +357,7 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
                 }}
                 orientation="vertical"
                 value={volume}
-                onChange={(e, newValue) => setVolume(newValue as number)}
+                onChange={(_e, newValue) => setVolume(newValue as number)}
                 aria-labelledby="continuous-slider"
                 min={0}
                 max={100}
