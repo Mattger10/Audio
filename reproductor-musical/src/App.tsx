@@ -4,7 +4,6 @@ import Reproductor from "./Components/Reproductor";
 import ReproductorArtists from "./Components/ReproductorArtists";
 import PagRockNacional from "./Components/PagRockNacional";
 import ReproductorRock from "./Components/ReproductorRock";
-import PagFavoritos from "./Components/pagFavoritos";
 import ReproductorFavoritos from "./Components/ReproductorFavoritos";
 import rocknacional from "./Components/Rocknacional.json";
 import recommended from "./Components/recommended.json";
@@ -229,6 +228,8 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+
 
 const Img = styled("div")(() => ({
   backgroundRepeat: "no-repeat",
