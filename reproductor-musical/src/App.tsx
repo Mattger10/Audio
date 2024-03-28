@@ -206,7 +206,7 @@ export function App() {
           </div>
         )}
 
-      {(location.pathname === "/" ||
+      {(location.pathname === "" ||
         location.pathname.startsWith("/artistas") ||
         location.pathname.startsWith("/rocknacional") ||
         location.pathname.startsWith("/exitos") ||
