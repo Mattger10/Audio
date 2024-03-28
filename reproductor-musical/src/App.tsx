@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Reproductor from "./Components/Reproductor";
 import ReproductorArtists from "./Components/ReproductorArtists";
@@ -34,18 +34,16 @@ interface Data {
   photo_url?: string;
 }
 
-const App: React.FC = () => {
+export function App() {
   const [seleccionarCancion, setSeleccionarCancion] = useState<string | null>(
     null
   );
   const [showReproductor, setShowReproductor] = useState(false);
   const [, setSelectedSong] = useState<string>("");
-  const [favoritos, ] = useState<string[]>(() => {
+  const [favoritos] = useState<string[]>(() => {
     const storedFavoritos = localStorage.getItem("favoritos");
     return storedFavoritos ? JSON.parse(storedFavoritos) : [];
   });
-
-  
 
   const [, setShowReproductorArtists] = useState(false);
   const [, setShowReproductorRock] = useState(false);
@@ -130,8 +128,6 @@ const App: React.FC = () => {
     setMostrarReproductorFavoritos(false);
   };
 
-  const location = useLocation();
-
   const allSongs = [
     ...rocknacional[0].songs,
     ...recommended[0].songs,
@@ -151,8 +147,6 @@ const App: React.FC = () => {
     <div>
       <Img />
       <ResponsiveAppBar searchTerm={searchTerm} onSearch={handleSearch} />
-
-  
 
       <Routes>
         <Route path="/" element={<Artistas />} />
@@ -185,9 +179,12 @@ const App: React.FC = () => {
         />
         <Route
           path="favoritos"
-          element={<Favoritos mostrarTabla={true} handleSelect={handleSelect} />}
+          element={
+            <Favoritos mostrarTabla={true} handleSelect={handleSelect} />
+          }
         />
       </Routes>
+
       {(location.pathname === "/" ||
         location.pathname.startsWith("/artistas") ||
         location.pathname.startsWith("/rocknacional") ||
@@ -196,7 +193,6 @@ const App: React.FC = () => {
         location.pathname.startsWith("/search")) &&
         seleccionarCancion &&
         showReproductor &&
-        
         cancionesFavoritas && (
           <div>
             <Reproductor seleccionar={seleccionarCancion} />
@@ -207,7 +203,6 @@ const App: React.FC = () => {
               seleccionar={seleccionarCancion}
               onClose={handleCloseReproductor}
             />
-            
           </div>
         )}
 
@@ -229,7 +224,7 @@ const App: React.FC = () => {
         )}
     </div>
   );
-};
+}
 
 export default App;
 
