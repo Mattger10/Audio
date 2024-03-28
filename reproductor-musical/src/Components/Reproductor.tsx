@@ -141,6 +141,16 @@ const Reproductor: FunctionComponent<ReproductorProps> = ({ seleccionar }) => {
     setIsVisible(!isVisible);
   };
 
+  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
+    if (audioRef.current) {
+      const seekTime = ((newValue as number) * duration) / 100;
+      audioRef.current.currentTime = seekTime;
+      setCurrentTime(seekTime); // Actualiza el tiempo actual de reproducción
+      setSliderValue(newValue as number);
+    }
+  };
+
+
   const currentSongData = songs[currentSongIndex];
 
   if (currentSongData) {
@@ -355,6 +365,7 @@ const Reproductor: FunctionComponent<ReproductorProps> = ({ seleccionar }) => {
                   size="small"
                   ref={progressBarRef}
                   value={sliderValue}
+                  onChange={handleSliderChange}
                   onClick={handleProgressBarClick}
                   sx={{
                     color: "#ccc",

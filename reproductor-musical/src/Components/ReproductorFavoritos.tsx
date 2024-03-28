@@ -37,7 +37,6 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
   const [autoPlayNext, setAutoPlayNext] = useState(false);
   const [, setCurrentRandomIndex] = useState(-1);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
-  
 
   const findSelectedSongIndex = (songName: string): number => {
     return cancionesFavoritas.findIndex((song) => song.song_url === songName);
@@ -118,7 +117,7 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
     if (seleccionarCancion) {
       playSelectedSong(seleccionarCancion);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [seleccionarCancion]);
 
   const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -153,7 +152,7 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
 
   const handleSliderChange = (_event: Event, newValue: number | number[]) => {
     if (audioRef.current) {
-      const seekTime = (newValue as number) * duration / 100;
+      const seekTime = ((newValue as number) * duration) / 100;
       audioRef.current.currentTime = seekTime;
       setCurrentTime(seekTime); // Actualiza el tiempo actual de reproducción
       setSliderValue(newValue as number);
@@ -176,8 +175,8 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
             }}
             onClick={handleToggleVisibility}
           >
-              <IconButton onClick={onClose}>
-            <Tooltip title={"Cerrar"}>
+            <IconButton onClick={onClose}>
+              <Tooltip title={"Cerrar"}>
                 <HighlightOffOutlinedIcon
                   sx={{
                     position: "fixed",
@@ -189,12 +188,13 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
                       color: "#ffee04",
                     },
                     "@media screen and (max-width: 768px)": {
-                      marginLeft: "2rem",
+                      right: 10,
+                      top: 10,
                     },
                   }}
                 />
-            </Tooltip>
-              </IconButton>
+              </Tooltip>
+            </IconButton>
             <Box
               sx={{
                 position: "fixed",

@@ -212,6 +212,16 @@ const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
     setIsVisible(!isVisible);
   };
 
+  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
+    if (audioRef.current) {
+      const seekTime = ((newValue as number) * duration) / 100;
+      audioRef.current.currentTime = seekTime;
+      setCurrentTime(seekTime); // Actualiza el tiempo actual de reproducción
+      setSliderValue(newValue as number);
+    }
+  };
+
+
   const currentSongData = songs[currentSongIndex];
 
   if (currentSongData) {
@@ -422,6 +432,7 @@ const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
                   size="small"
                   ref={progressBarRef}
                   value={sliderValue}
+                  onChange={handleSliderChange}
                   onClick={handleProgressBarClick}
                   sx={{
                     color: "#ccc",
@@ -480,8 +491,8 @@ const Widget = styled("div")(() => ({
 }));
 
 const Img = styled("img")(() => ({
-  width: "500px",
-  height: "500px",
+  width: "30rem",
+  height: "30rem",
   "@media (max-width: 768px)": {
     width: "250px",
     height: "250px",

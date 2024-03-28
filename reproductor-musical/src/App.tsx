@@ -1,11 +1,9 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Reproductor from "./Components/Reproductor";
 import ReproductorArtists from "./Components/ReproductorArtists";
 import PagRockNacional from "./Components/PagRockNacional";
 import ReproductorRock from "./Components/ReproductorRock";
-import PagFavoritos from "./Components/pagFavoritos";
 import ReproductorFavoritos from "./Components/ReproductorFavoritos";
 import rocknacional from "./Components/Rocknacional.json";
 import recommended from "./Components/recommended.json";
@@ -16,6 +14,7 @@ import Artistas from "./Components/artist-slider";
 import ArtistasDetails from "./Components/ArtistDetails";
 import styled from "styled-components";
 import SearchResults from "./Components/SearchResults";
+import Favoritos from "./Components/Favoritos";
 
 interface Song {
   songName: string;
@@ -46,9 +45,7 @@ const App: React.FC = () => {
     return storedFavoritos ? JSON.parse(storedFavoritos) : [];
   });
 
-  useEffect(() => {
-    localStorage.setItem("favoritos", JSON.stringify(favoritos));
-  }, [favoritos]);
+  
 
   const [, setShowReproductorArtists] = useState(false);
   const [, setShowReproductorRock] = useState(false);
@@ -160,7 +157,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Artistas />} />
         <Route
-          path="/artistas/:id"
+          path="artistas/:id"
           element={
             <ArtistasDetails
               onPlaySong={handlePlaySong}
@@ -169,11 +166,11 @@ const App: React.FC = () => {
           }
         />
         <Route
-          path="/rocknacional"
+          path="rocknacional"
           element={<PagRockNacional handleSelectSong={handleSelectSong} />}
         />
         <Route
-          path="/search"
+          path="search"
           element={
             <SearchResults
               searchResults={searchResults}
@@ -183,12 +180,12 @@ const App: React.FC = () => {
           }
         />
         <Route
-          path="/exitos"
+          path="exitos"
           element={<Recommended handleSelectSong={handleSelectSong} />}
         />
         <Route
-          path="/favoritos"
-          element={<PagFavoritos handleSelect={handleSelect} />}
+          path="favoritos"
+          element={<Favoritos mostrarTabla={true} handleSelect={handleSelect} />}
         />
       </Routes>
       {(location.pathname === "/" ||
@@ -199,6 +196,7 @@ const App: React.FC = () => {
         location.pathname.startsWith("/search")) &&
         seleccionarCancion &&
         showReproductor &&
+        
         cancionesFavoritas && (
           <div>
             <Reproductor seleccionar={seleccionarCancion} />
@@ -209,6 +207,7 @@ const App: React.FC = () => {
               seleccionar={seleccionarCancion}
               onClose={handleCloseReproductor}
             />
+            
           </div>
         )}
 
