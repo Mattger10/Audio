@@ -149,7 +149,7 @@ export function App() {
       <ResponsiveAppBar searchTerm={searchTerm} onSearch={handleSearch} />
 
       <Routes>
-        <Route path="/" element={<Artistas />} />
+        <Route path="" element={<Artistas />} />
         <Route
           path="artistas/:id"
           element={
