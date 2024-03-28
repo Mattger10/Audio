@@ -185,7 +185,7 @@ export function App() {
         />
       </Routes>
 
-      {(location.pathname === "/" ||
+      {(location.pathname === "" ||
         location.pathname.startsWith("/artistas") ||
         location.pathname.startsWith("/rocknacional") ||
         location.pathname.startsWith("/exitos") ||
