@@ -1,26 +1,45 @@
-import * as React from "react";
-import { Typography, Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import styled from "styled-components";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import recommendedData from "./recommended.json";
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 
-interface RecommendedProps {
+interface Song {
+  songName: string;
+  duration: string;
+  artists_evolved: string[];
+  number: string;
+  artista: string;
+  icon: string;
+  album: string;
+  song_url: string;
+}
+
+interface Data {
+  songs: Song[];
+  name?: string;
+  bio?: string;
+  photo_url?: string;
+}
+
+interface SearchResultsProps {
+  searchResults: Data[];
+  handleSelect: (song: string) => void;
   handleSelectSong: (song: string, url: string, index: number) => void;
 }
 
-const Recommended: React.FunctionComponent<RecommendedProps> = ({
+const SearchResults: React.FC<SearchResultsProps> = ({
+  searchResults,
+  handleSelect,
   handleSelectSong,
 }) => {
-  const allSongs = recommendedData.find((songs) => songs.songs);
-  // const songs = allSongs ? allSongs.songs : [];
-  const [verTodasLasCanciones, ] = React.useState(false);
-  const [, setShowReproductor] = React.useState(false);
-  const audioRef = React.useRef<HTMLAudioElement | null>(null);
-  // Function to format artist names using Intl.ListFormat('es').format
+  const handlePlayPause = (url: string, song: string, index: number) => {
+    handleSelect(song);
+    handleSelectSong(song, url, index);
+  };
 
-  const [favoritos, setFavoritos] = React.useState<string[]>(() => {
+  const [favoritos, setFavoritos] = useState<string[]>(() => {
     // Recuperar el estado de favoritos del localStorage al cargar el componente
     const storedFavoritos = localStorage.getItem("favoritos");
     return storedFavoritos ? JSON.parse(storedFavoritos) : [];
@@ -36,43 +55,37 @@ const Recommended: React.FunctionComponent<RecommendedProps> = ({
     }
   };
 
-  React.useEffect(() => {
-    // Guardar el estado de favoritos en el localStorage al actualizarlo
+  useEffect(() => {
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
   }, [favoritos]);
 
-  const handlePlayPause = (url: string, song: string, index: number) => {
-    handleSelectSong(song, url, index);
-    setShowReproductor(true);
-  };
-
-  if (allSongs) {
-    return (
-      <CenteredBox>
-        <Box
+  return (
+    <CenteredBox>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "2rem",
+        }}
+      >
+        <Typography
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "2rem",
+            color: "#ccc",
+            fontSize: "30px",
+            fontWeight: "bold",
+            "&:hover": {
+              color: "#ffee04",
+            },
           }}
         >
-          <Typography
-            sx={{
-              color: "#ccc",
-              fontSize: "30px",
-              fontWeight: "bold",
-              "&:hover": {
-                color: "#ffee04",
-              },
-            }}
-          >
-            ÉXITOS
-          </Typography>
-        </Box>
-        <StyledList>
-          {recommendedData[0].songs.map((song, index) => {
-            return verTodasLasCanciones || index < 100 ? (
-              <StyledListItem key={index}>
+          RESULTADOS
+        </Typography>
+      </Box>
+      {searchResults.map((data, index) => (
+        <Box>
+          <StyledList key={index}>
+            {data.songs.map((song: Song, songIndex: number) => (
+              <StyledListItem key={songIndex}>
                 <Box
                   sx={{
                     display: "flex",
@@ -106,12 +119,6 @@ const Recommended: React.FunctionComponent<RecommendedProps> = ({
                         {song.artista}
                       </Typography>
                     </Box>
-
-                    <audio
-                      ref={audioRef}
-                      controls
-                      style={{ display: "none" }}
-                    ></audio>
                   </Box>
                   <Box sx={{ display: "flex", flexDirection: "column" }}>
                     <PlayCircleOutlineIcon
@@ -154,49 +161,15 @@ const Recommended: React.FunctionComponent<RecommendedProps> = ({
                   </Box>
                 </Box>
               </StyledListItem>
-            ) : null;
-          })}
-        </StyledList>
-        {/* <ContainerButton>
-          <StyledButton
-            onClick={() => setVerTodasLasCanciones(!verTodasLasCanciones)}
-            sx={{ marginTop: "1rem" }}
-          >
-            {verTodasLasCanciones ? (
-              <Typography sx={{ letterSpacing: "0.2rem" }}>
-                Mostrar menos
-                <KeyboardArrowUpIcon
-                  sx={{
-                    position: "absolute",
-                    marginLeft: "0.5rem",
-                    marginTop: "-0.1rem",
-                    fontSize: 25,
-                  }}
-                />
-              </Typography>
-            ) : (
-              <Typography sx={{ letterSpacing: "0.2rem" }}>
-                Mostrar más
-                <KeyboardArrowDownIcon
-                  sx={{
-                    position: "absolute",
-                    marginLeft: "0.5rem",
-                    marginTop: "-0.1rem",
-                    fontSize: 25,
-                  }}
-                />
-              </Typography>
-            )}
-          </StyledButton>
-        </ContainerButton> */}
-      </CenteredBox>
-    );
-  } else {
-    return null;
-  }
+            ))}
+          </StyledList>
+        </Box>
+      ))}
+    </CenteredBox>
+  );
 };
 
-export default Recommended;
+export default SearchResults;
 
 const CenteredBox = styled(Box)`
   display: grid;
@@ -225,7 +198,7 @@ const StyledListItem = styled("li")(() => ({
   paddingRight: "15px",
   backgroundColor: "#0b0c17",
   border: "1px solid #0b0c17",
-  width: "95%",
+  width: "90%",
   height: "50%",
   borderRadius: "10px",
   "@media screen and (max-width: 768px)": {
@@ -238,16 +211,3 @@ const StyledImage = styled.img`
   height: 60px;
   border-radius: 50%;
 `;
-
-// const StyledButton = styled(Button)(() => ({
-//   color: "#fff",
-//   ":hover": {
-//     backgroundColor: "transparent",
-//   },
-// }));
-
-// const ContainerButton = styled("div")(() => ({
-//   display: "flex",
-//   justifyContent: "center",
-//   marginBottom: "5rem",
-// }));

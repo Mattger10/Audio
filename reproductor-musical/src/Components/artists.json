@@ -435,6 +435,26 @@
         "album": "",
         "icon": "https://i.scdn.co/image/ab67616d0000b273b9a03b42ffc5fb22af6e55e4",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FNo%20me%20digas%20que%20no.mp3?alt=media&token=e4254569-79c3-4f36-aaf1-66cec51cf216"
+      },
+      {
+        "songName": "Adicto",
+        "number": "14",
+        "duration": "3:25",
+        "artists_evolved": ["Emanero", "La Konga", "Antonio Rios"],
+        "artista": "Emanero",
+        "album": "Adicto",
+        "icon": "https://i.scdn.co/image/ab67616d0000b2736333e0be71fd6dd058afcac2",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FNo%20me%20digas%20que%20no.mp3?alt=media&token=e4254569-79c3-4f36-aaf1-66cec51cf216"
+      },
+      {
+        "songName": "Whisky",
+        "number": "15",
+        "duration": "2:21",
+        "artists_evolved": ["Emanero"],
+        "artista": "Emanero",
+        "album": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b2735ef3fd63b8e398af3d9ff924",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FNo%20me%20digas%20que%20no.mp3?alt=media&token=e4254569-79c3-4f36-aaf1-66cec51cf216"
       }
     ]
   },
@@ -554,6 +574,28 @@
         "album": "Mas Fuego",
         "letra": "",
         "icon": "https://mp3.hhgroups.com/albumes/Santaflow-Delantera_Mas-fuego-24454.jpg",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2F10.%20Santaflow%20-%20La%20senda%20%5BProducido%20por%20Santaflow%5D%20-%20www.hhgroups.com.mp3?alt=media&token=729ee470-99f9-4ff4-aec0-550a3039b35a"
+      },
+      {
+        "songName": "Sigo vivo",
+        "duration": "04:29",
+        "number": "11",
+        "artists_evolved": ["Santaflow"],
+        "artista": "Santaflow",
+        "album": "Atlántico",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d00001e020b0a65c534eb57148270e3e3",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2F10.%20Santaflow%20-%20La%20senda%20%5BProducido%20por%20Santaflow%5D%20-%20www.hhgroups.com.mp3?alt=media&token=729ee470-99f9-4ff4-aec0-550a3039b35a"
+      },
+      {
+        "songName": "Protocolo misántropo",
+        "duration": "04:30",
+        "number": "12",
+        "artists_evolved": ["Santaflow"],
+        "artista": "Santaflow",
+        "album": "",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b27386ed404c589423fd56a26d5b",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2F10.%20Santaflow%20-%20La%20senda%20%5BProducido%20por%20Santaflow%5D%20-%20www.hhgroups.com.mp3?alt=media&token=729ee470-99f9-4ff4-aec0-550a3039b35a"
       }
     ]
@@ -683,6 +725,17 @@
         "album": "Hotel Miranda",
         "letra": "",
         "icon": "https://www.cmtv.com.ar/tapas-cd/0257558001670461141.webp",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FMiranda%2FNavidad.mp3?alt=media&token=0deac9d0-2c76-47f0-9a07-e19c7d07b1a2"
+      },
+      {
+        "songName": "Perfecta",
+        "number": "12",
+        "duration": "3:45",
+        "artists_evolved": ["Miranda"],
+        "artista": "Miranda",
+        "album": "El disco de tu corazón",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b273eaf31ed63e13e5e99edef309",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FMiranda%2FNavidad.mp3?alt=media&token=0deac9d0-2c76-47f0-9a07-e19c7d07b1a2"
       }
     ]
@@ -1141,7 +1194,7 @@
     "photo_url": "https://i.scdn.co/image/ab67616d0000b27328581cfe196c266c132a9d62",
     "songs": [
       {
-        "songName": "Bohemian Rhapsody.",
+        "songName": "Bohemian Rhapsody",
         "number": "01",
         "duration": "5:59",
         "artists_evolved": ["Queen"],
@@ -1149,6 +1202,28 @@
         "album": "Bohemian Rhapsody",
         "letra": "",
         "icon": "https://i.scdn.co/image/ab67616d0000b27328581cfe196c266c132a9d62",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FBohemian%20Rhapsody.mp3?alt=media&token=0a1d7ca6-d5b7-4316-a581-284de23ff3f7"
+      },
+      {
+        "songName": "The Show Must Go On",
+        "number": "02",
+        "duration": "4:22",
+        "artists_evolved": ["Queen"],
+        "artista": "Queen",
+        "album": "Innuendo",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b27350dcdcb73b5bbff6d3136131",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FBohemian%20Rhapsody.mp3?alt=media&token=0a1d7ca6-d5b7-4316-a581-284de23ff3f7"
+      },
+      {
+        "songName": "We Are The Champions",
+        "number": "03",
+        "duration": "3:06",
+        "artists_evolved": ["Queen"],
+        "artista": "Queen",
+        "album": " News of the World",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b27328af20e27e04121b00bdf876",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FBohemian%20Rhapsody.mp3?alt=media&token=0a1d7ca6-d5b7-4316-a581-284de23ff3f7"
       }
     ]
@@ -1180,6 +1255,17 @@
         "letra": "",
         "icon": "https://i.scdn.co/image/ab67616d0000b273d543f7c7de880da5370922c0",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2Fy2mate.com%20-%20Gustavo%20Cerati%20Adi%C3%B3s%20Official%20Video.mp3?alt=media&token=7f412e65-0771-4a8c-af9b-0bf5b1b13600"
+      },
+      {
+        "songName": "Trátame suavemente",
+        "number": "03",
+        "duration": "3:22",
+        "artists_evolved": ["Gustavo Cerati"],
+        "artista": "Gustavo Cerati",
+        "album": "Soda Stereo",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b2738fd9b16eb6bdd20c95717258",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2Fy2mate.com%20-%20Gustavo%20Cerati%20Adi%C3%B3s%20Official%20Video.mp3?alt=media&token=7f412e65-0771-4a8c-af9b-0bf5b1b13600"
       }
     ]
   },
@@ -1198,6 +1284,28 @@
         "album": "Attaque 77",
         "letra": "",
         "icon": "https://akamai.sscdn.co/uploadfile/letras/albuns/a/5/9/4/633591524754449.jpg",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2FArrancacorazones.mp3?alt=media&token=d80a1256-da7b-495d-96cb-c3aab437cacc"
+      },
+      {
+        "songName": "No me arrepiento de este amor",
+        "number": "02",
+        "duration": "3:27",
+        "artists_evolved": ["Attaque 77"],
+        "artista": "Attaque 77",
+        "album": "Attaque 77",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b2731871e0880d72819d7a16fb4f",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2FArrancacorazones.mp3?alt=media&token=d80a1256-da7b-495d-96cb-c3aab437cacc"
+      },
+      {
+        "songName": "Hacelo por mí",
+        "number": "03",
+        "duration": "3:49",
+        "artists_evolved": ["Attaque 77"],
+        "artista": "Attaque 77",
+        "album": "El cielo puede esperar",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b273f5d6436b394a1bef339fd197",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2FArrancacorazones.mp3?alt=media&token=d80a1256-da7b-495d-96cb-c3aab437cacc"
       }
     ]
@@ -1218,6 +1326,28 @@
         "letra": "",
         "icon": "https://i.scdn.co/image/ab67616d0000b273e4b8ec3d2ffe1f77c7185d48",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2Fy2mate.com%20-%20Andr%C3%A9s%20Calamaro%20%20Flaca%20Videoclip%20Oficial.mp3?alt=media&token=3677c608-21e0-41c9-8bdd-eed0191efbaa"
+      },
+      {
+        "songName": "Cuando no estás",
+        "number": "02",
+        "duration": "3:30",
+        "artists_evolved": ["Andrés Calamaro"],
+        "artista": "Andrés Calamaro",
+        "album": "Bohemio",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b2734aaffa19f7fdc2ec78823760",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2Fy2mate.com%20-%20Andr%C3%A9s%20Calamaro%20%20Flaca%20Videoclip%20Oficial.mp3?alt=media&token=3677c608-21e0-41c9-8bdd-eed0191efbaa"
+      },
+      {
+        "songName": "Cuando te conocí",
+        "number": "03",
+        "duration": "3:19",
+        "artists_evolved": ["Andrés Calamaro"],
+        "artista": "Andrés Calamaro",
+        "album": "Honestidad brutal",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b273ff005a174a4100e63335624c",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2Fy2mate.com%20-%20Andr%C3%A9s%20Calamaro%20%20Flaca%20Videoclip%20Oficial.mp3?alt=media&token=3677c608-21e0-41c9-8bdd-eed0191efbaa"
       }
     ]
   },
@@ -1236,6 +1366,28 @@
         "album": "La Renga",
         "letra": "",
         "icon": "https://images.genius.com/ef75ac62fcf4c0e04bbcbdf2f105959f.999x999x1.jpg",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2Fy2mate.com%20-%20La%20Renga%20%20Balada%20Del%20Diablo%20y%20La%20Muerte.mp3?alt=media&token=66e543cf-8ff0-4511-8168-226b3b0701a5"
+      },
+      {
+        "songName": "Triste canción de amor",
+        "number": "02",
+        "duration": "5:07",
+        "artists_evolved": ["La Renga"],
+        "artista": "La Renga",
+        "album": "A donde me lleva la vida",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b273c5a95016d412fd8bc0884084",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2Fy2mate.com%20-%20La%20Renga%20%20Balada%20Del%20Diablo%20y%20La%20Muerte.mp3?alt=media&token=66e543cf-8ff0-4511-8168-226b3b0701a5"
+      },
+      {
+        "songName": "Cuando estés acá",
+        "number": "03",
+        "duration": "4:56",
+        "artists_evolved": ["La Renga"],
+        "artista": "La Renga",
+        "album": "La Renga",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b2731aa8c66e1c27469058e2b794",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2Fy2mate.com%20-%20La%20Renga%20%20Balada%20Del%20Diablo%20y%20La%20Muerte.mp3?alt=media&token=66e543cf-8ff0-4511-8168-226b3b0701a5"
       }
     ]
@@ -1289,7 +1441,7 @@
     "songs": [
       {
         "songName": "Campanas de la noche.",
-        "number": "11",
+        "number": "01",
         "duration": "3:57",
         "artists_evolved": ["Los Tipitos"],
         "artista": "Los Tipitos",
@@ -1300,13 +1452,24 @@
       },
       {
         "songName": "Solo figuras.",
-        "number": "12",
+        "number": "02",
         "duration": "2:56",
         "artists_evolved": ["Los Tipitos, Leo Gieco"],
         "artista": "Los Tipitos y Leo Gieco",
         "album": "Los Tipitos",
         "letra": "",
         "icon": "https://i.scdn.co/image/ab67616d0000b273638042c194aa79eddcf58059",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2FSolo%20figuras.mp3?alt=media&token=a91a1e87-90b1-481b-b660-5ec1b0a05b5e"
+      },
+      {
+        "songName": "Silencio",
+        "number": "03",
+        "duration": "2:56",
+        "artists_evolved": ["Los Tipitos"],
+        "artista": "Los Tipitos",
+        "album": "Armandi Camaleón",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b2735c54b1c82340ebace0d27893",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2FSolo%20figuras.mp3?alt=media&token=a91a1e87-90b1-481b-b660-5ec1b0a05b5e"
       }
     ]
@@ -1327,6 +1490,28 @@
         "letra": "",
         "icon": "https://i.scdn.co/image/ab67616d0000b273cdd8ead7c7be9879e30e7cb0",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2FIntoxicados.mp3?alt=media&token=7ff11041-5896-489b-88cd-9b6333272a3f"
+      },
+      {
+        "songName": "Nunca quise",
+        "number": "02",
+        "duration": "3:47",
+        "artists_evolved": ["Intoxicados"],
+        "artista": "Intoxicados",
+        "album": "Otro día en el planeta Tierra",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b273cdd8ead7c7be9879e30e7cb0",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2FIntoxicados.mp3?alt=media&token=7ff11041-5896-489b-88cd-9b6333272a3f"
+      },
+      {
+        "songName": "Una vela",
+        "number": "03",
+        "duration": "4:19",
+        "artists_evolved": ["Intoxicados"],
+        "artista": "Intoxicados",
+        "album": "No es sólo rock and roll",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b2733ee9a09c327e80b3f67ac003",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2FIntoxicados.mp3?alt=media&token=7ff11041-5896-489b-88cd-9b6333272a3f"
       }
     ]
   },
@@ -1345,6 +1530,28 @@
         "album": "La llave de la puerta secreta",
         "letra": "",
         "icon": "https://i.scdn.co/image/ab67616d0000b273c9d55bbe57850e8db251d094",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2FAun%20estas%20en%20mis%20sue%C3%B1os.mp3?alt=media&token=af34114e-6312-443a-b9fb-363d7b2e0ff3"
+      },
+      {
+        "songName": "Mujer amantes",
+        "number": "02",
+        "duration": "5:54",
+        "artists_evolved": ["Rata Blanca"],
+        "artista": "Rata Blanca",
+        "album": "Magos, espadas y rosas",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d00001e02478c3f69d4259a077b0d8094",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2FAun%20estas%20en%20mis%20sue%C3%B1os.mp3?alt=media&token=af34114e-6312-443a-b9fb-363d7b2e0ff3"
+      },
+      {
+        "songName": "La leyenda del hada y el mago",
+        "number": "03",
+        "duration": "5:19",
+        "artists_evolved": ["Rata Blanca"],
+        "artista": "Rata Blanca",
+        "album": "Magos, espadas y rosas",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d00001e02478c3f69d4259a077b0d8094",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FRock%20Nacional%2FAun%20estas%20en%20mis%20sue%C3%B1os.mp3?alt=media&token=af34114e-6312-443a-b9fb-363d7b2e0ff3"
       }
     ]
@@ -1367,14 +1574,25 @@
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FUn%20flow%20de%20infarto%20prod%20Bizarrap%20%20YSYA2020%20Vol%206.mp3?alt=media&token=e24aaf24-ca27-4f62-af84-a9b0496c767f"
       },
       {
-        "songName": "Music Sessions #37.",
+        "songName": "Una de Dos",
         "number": "02",
         "duration": "2:37",
-        "artists_evolved": ["Bizarrap"],
+        "artists_evolved": ["Ysy A"],
         "artista": "Ysy A",
-        "album": "Music Sessions",
+        "album": "Ysy A 2020",
         "letra": "",
-        "icon": "https://i.scdn.co/image/ab67616d0000b2739f185af16085ffa8c91b94eb",
+        "icon": "https://i.scdn.co/image/ab67616d0000b2739e202241efc1843e2dd79710",
+        "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FBizarrap%2FYSY%20A.mp3?alt=media&token=b63aa5a7-e73f-49d1-8e12-b88ef432b7a5"
+      },
+      {
+        "songName": "Silbando",
+        "number": "03",
+        "duration": "2:05",
+        "artists_evolved": ["Ysy A"],
+        "artista": "Ysy A",
+        "album": "Ysy A 2020",
+        "letra": "",
+        "icon": "https://i.scdn.co/image/ab67616d0000b27356d05786bf803ac85fbd6f3a",
         "song_url": "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Musicas%2FBizarrap%2FYSY%20A.mp3?alt=media&token=b63aa5a7-e73f-49d1-8e12-b88ef432b7a5"
       }
     ]

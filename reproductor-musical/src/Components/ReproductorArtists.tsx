@@ -10,11 +10,12 @@ import artists from "./artists.json";
 import IconButton from "@mui/material/IconButton";
 import PauseRounded from "@mui/icons-material/PauseRounded";
 import PlayArrowRounded from "@mui/icons-material/PlayArrowRounded";
-
+import OpenInFullIcon from "@mui/icons-material/OpenInFull";
+import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
+import Tooltip from "@mui/material/Tooltip";
 
 interface ReproductorArtistsProps {
   seleccionar: string;
-
 }
 
 interface Song {
@@ -29,9 +30,7 @@ interface Song {
 
 const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
   seleccionar,
-
 }) => {
-
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
@@ -49,10 +48,7 @@ const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
   const [isShuffleMode, setIsShuffleMode] = useState(false);
   const [, setCurrentRandomIndex] = useState(-1);
   const [currentArtist, setCurrentArtist] = useState<string>("");
-  const [, setCurrentSongData1] =
-    useState<Partial<Song> | null>(null);
-
-
+  const [, setCurrentSongData1] = useState<Partial<Song> | null>(null);
 
   useEffect(() => {
     if (seleccionar) {
@@ -65,7 +61,6 @@ const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
       }
     }
   }, [seleccionar]);
-
 
   const handleTimeUpdate = () => {
     if (audioRef.current) {
@@ -182,8 +177,6 @@ const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
     }
   }, [seleccionar]);
 
-
-
   const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (audioRef.current) {
       const progressBar = progressBarRef.current;
@@ -219,12 +212,21 @@ const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
     setIsVisible(!isVisible);
   };
 
+  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
+    if (audioRef.current) {
+      const seekTime = ((newValue as number) * duration) / 100;
+      audioRef.current.currentTime = seekTime;
+      setCurrentTime(seekTime); // Actualiza el tiempo actual de reproducción
+      setSliderValue(newValue as number);
+    }
+  };
+
+
   const currentSongData = songs[currentSongIndex];
 
   if (currentSongData) {
     return (
-      <Box  >
-        
+      <Box>
         {isVisible && (
           <Box
             sx={{
@@ -234,7 +236,9 @@ const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
               top: "0%",
               left: "0%",
               backdropFilter: "blur(10px)",
+              cursor: "pointer",
             }}
+            onClick={handleToggleVisibility}
           >
             <Box
               sx={{
@@ -244,11 +248,7 @@ const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
                 transform: "translate(-50%, -50%)",
               }}
             >
-              <Img
-                src={currentSongData.icon}
-                alt={currentSongData.artista}
-               
-              />
+              <Img src={currentSongData.icon} alt={currentSongData.artista} />
               <Box
                 sx={{
                   display: "flex",
@@ -263,66 +263,33 @@ const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
                   fontWeight={500}
                   sx={{ fontSize: "25px" }}
                 >
-                  {currentSongData.artista}{" "}
-                  {/* Muestra el nombre del artista */}
+                  {currentSongData.artista}
                 </Typography>
                 <Typography noWrap sx={{ color: "#ffee04", fontSize: "20px" }}>
-                  <b>{currentSongData.songName}</b>{" "}
-                  {/* Muestra el nombre de la canción */}
+                  {currentSongData.songName}
                 </Typography>
                 <Typography
                   noWrap
                   letterSpacing={-0.25}
                   sx={{ color: "white" }}
                 >
-                  {currentSongData.album} {/* Muestra el nombre del álbum */}
+                  {currentSongData.album}
                 </Typography>
               </Box>
             </Box>
           </Box>
         )}
         <Box
-       onClick={handleToggleVisibility}
           sx={{
             position: "fixed",
             bottom: 0,
             left: 0,
             width: "100%",
             overflow: "hidden",
-            zIndex: 9999,
           }}
         >
-          <Widget sx={{ width: "auto",}} >
-            {currentSongData && (
-              <Slider
-                aria-label="time-indicator"
-                size="small"
-                ref={progressBarRef}
-                value={sliderValue}
-                onClick={handleProgressBarClick}
-                sx={{
-                  color: "#ffee04",
-                  height: 4,
-                  width: "100%",
-                  "& .MuiSlider-thumb": {
-                    width: 8,
-                    height: 8,
-
-                    "&::before": {
-                      boxShadow: "0 2px 12px 0 rgba(0,0,0,0.4)",
-                    },
-                    "&:hover, &.Mui-focusVisible": {},
-                    "&.Mui-active": {
-                      width: 20,
-                      height: 20,
-                    },
-                  },
-                  "& .MuiSlider-rail": {
-                    opacity: 0.28,
-                  },
-                }}
-              />
-            )}
+          <Widget sx={{ width: "auto" }}>
+        
             <Box
               sx={{
                 display: "flex",
@@ -331,44 +298,86 @@ const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
                 mt: -1,
               }}
             >
-              <IconButton>
-                <RepeatIcon
+              
+              <Tooltip title="Repetir">
+                <IconButton
                   onClick={() => setIsRepeatMode((prevMode) => !prevMode)}
-                  fontSize="large"
-                  sx={{ color: isRepeatMode ? "#ed215e" : "#fff" }}
-                />
-              </IconButton>
+                >
+                  <RepeatIcon
+                    sx={{
+                      color: isRepeatMode ? "#ffee04" : "#ccc",
+                      fontSize: "29px",
+                      "&:hover": {
+                        color: "#ffee04",
+                      },
+                    }}
+                  />
+                </IconButton>
+              </Tooltip>
 
-              <IconButton aria-label="previous song">
-                <SkipPreviousIcon
+              <Tooltip title="Anterior">
+                <IconButton
+                  aria-label="previous song"
                   onClick={playPreviousSong}
-                  fontSize="large"
-                  sx={{ color: "#ffee04" }}
-                />
-              </IconButton>
-              <IconButton aria-label="toggle play">
-                {isPlaying ? (
-                  <PauseRounded
-                    onClick={togglePlay}
-                    sx={{ fontSize: "3rem", color: "#ffee04" }}
+                >
+                  <SkipPreviousIcon
+                    sx={{
+                      color: "#ccc",
+                      fontSize: "35px",
+                      "&:hover": {
+                        color: "#ffee04",
+                      },
+                    }}
                   />
-                ) : (
-                  <PlayArrowRounded
-                    onClick={togglePlay}
-                    sx={{ fontSize: "3rem", color: "#ffee04" }}
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title={isPlaying ? "Pausa" : "Reproducir"}>
+                <IconButton aria-label="toggle play" onClick={togglePlay}>
+                  {isPlaying ? (
+                    <PauseRounded
+                      sx={{
+                        fontSize: "35px",
+                        color: "#ccc",
+                        "&:hover": {
+                          color: "#ffee04",
+                        },
+                      }}
+                    />
+                  ) : (
+                    <PlayArrowRounded
+                      sx={{
+                        fontSize: "35px",
+                        color: "#ccc",
+                        "&:hover": {
+                          color: "#ffee04",
+                        },
+                      }}
+                    />
+                  )}
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title={"Siguiente"}>
+                <IconButton aria-label="next song" onClick={playNextSong}>
+                  <SkipNextIcon
+                    sx={{
+                      color: "#ccc",
+                      fontSize: "35px",
+                      "&:hover": {
+                        color: "#ffee04",
+                      },
+                    }}
                   />
-                )}
-              </IconButton>
-              <IconButton aria-label="next song">
-                <SkipNextIcon
-                  fontSize="large"
-                  onClick={playNextSong}
-                  sx={{ color: "#ffee04" }}
-                />
-              </IconButton>
-              <IconButton>
-                <ShuffleIcon
-                  fontSize="large"
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip
+                title={
+                  isShuffleMode ? "Desactivar aleatorio" : "Activar aleatorio"
+                }
+              >
+                <IconButton
                   onClick={() => {
                     if (isShuffleMode) {
                       setIsShuffleMode(false);
@@ -377,9 +386,80 @@ const ReproductorArtists: FunctionComponent<ReproductorArtistsProps> = ({
                       setIsShuffleMode(true);
                     }
                   }}
-                  sx={{ color: isShuffleMode ? "#ed215e" : "#ccc" }}
+                >
+                  <ShuffleIcon
+                    sx={{
+                      color: isShuffleMode ? "#ffee04" : "#ccc",
+                      fontSize: "27px",
+                      "&:hover": {
+                        color: "#ffee04",
+                      },
+                    }}
+                  />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={isVisible ? "Minimizar" : "Expandir"}>
+                <IconButton onClick={handleToggleVisibility}>
+                  {isVisible ? (
+                    <CloseFullscreenIcon
+                      sx={{
+                        color: "#ccc",
+                        fontSize: "23px",
+                        "&:hover": {
+                          color: "#ffee04",
+                        },
+                      }}
+                    />
+                  ) : (
+                    <OpenInFullIcon
+                      sx={{
+                        color: "#ccc",
+                        fontSize: "23px",
+                        "&:hover": {
+                          color: "#ffee04",
+                        },
+                      }}
+                    />
+                  )}
+                </IconButton>
+              </Tooltip>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              {currentSongData && (
+                
+                <Slider
+                  aria-label="time-indicator"
+                  size="small"
+                  ref={progressBarRef}
+                  value={sliderValue}
+                  onChange={handleSliderChange}
+                  onClick={handleProgressBarClick}
+                  sx={{
+                    color: "#ccc",
+                    height: 4,
+                    width: "50%",
+                    "& .MuiSlider-thumb": {
+                      width: 8,
+                      height: 8,
+
+                      "&::before": {
+                        boxShadow: "0 2px 12px 0 #ffee04",
+                      },
+                      "&:hover, &.Mui-focusVisible": {},
+                      "&.Mui-active": {
+                        width: 20,
+                        height: 20,
+                      },
+                    },
+                    "& .MuiSlider-rail": {
+                      opacity: 0.28,
+                    },
+                    "@media screen and (max-width: 768px)": {
+                      width: "100%",
+                    },
+                  }}
                 />
-              </IconButton>
+              )}
             </Box>
             <audio
               ref={audioRef}
@@ -406,15 +486,16 @@ const Widget = styled("div")(() => ({
   margin: "auto",
   position: "relative",
   zIndex: 1,
-  backgroundColor: "transparent",
+  backgroundColor: "#0b0c17",
   backdropFilter: "blur(40px)",
 }));
 
 const Img = styled("img")(() => ({
-  width: "500px",
-  height: "500px",
+  width: "30rem",
+  height: "30rem",
   "@media (max-width: 768px)": {
-    width: "250px", 
+    width: "250px",
     height: "250px",
   },
 }));
+
