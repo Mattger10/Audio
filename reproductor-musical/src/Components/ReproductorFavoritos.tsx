@@ -12,6 +12,7 @@ import PlayArrowRounded from "@mui/icons-material/PlayArrowRounded";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
 import Tooltip from "@mui/material/Tooltip";
+import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 
 interface ReproductorFavoritosProps {
   cancionesFavoritas: CancionFavorita[]; // Define el tipo de 'cancionesFavoritas'
@@ -22,13 +23,13 @@ interface ReproductorFavoritosProps {
 const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
   cancionesFavoritas,
   seleccionarCancion,
-
+  onClose,
 }) => {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const [, setCurrentTime] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [sliderValue, setSliderValue] = useState(0);
   const [isShuffleMode, setIsShuffleMode] = useState(false);
@@ -36,6 +37,7 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
   const [autoPlayNext, setAutoPlayNext] = useState(false);
   const [, setCurrentRandomIndex] = useState(-1);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
+  
 
   const findSelectedSongIndex = (songName: string): number => {
     return cancionesFavoritas.findIndex((song) => song.song_url === songName);
@@ -149,6 +151,15 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
     setIsVisible(!isVisible);
   };
 
+  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
+    if (audioRef.current) {
+      const seekTime = (newValue as number) * duration / 100;
+      audioRef.current.currentTime = seekTime;
+      setCurrentTime(seekTime); // Actualiza el tiempo actual de reproducción
+      setSliderValue(newValue as number);
+    }
+  };
+
   if (cancionesFavoritas[currentSongIndex]) {
     return (
       <Box>
@@ -165,6 +176,25 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
             }}
             onClick={handleToggleVisibility}
           >
+              <IconButton onClick={onClose}>
+            <Tooltip title={"Cerrar"}>
+                <HighlightOffOutlinedIcon
+                  sx={{
+                    position: "fixed",
+                    color: isShuffleMode ? "#ffee04" : "#ccc",
+                    right: 40,
+                    top: 40,
+                    fontSize: "37px",
+                    "&:hover": {
+                      color: "#ffee04",
+                    },
+                    "@media screen and (max-width: 768px)": {
+                      marginLeft: "2rem",
+                    },
+                  }}
+                />
+            </Tooltip>
+              </IconButton>
             <Box
               sx={{
                 position: "fixed",
@@ -359,6 +389,7 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
                   size="small"
                   ref={progressBarRef}
                   value={sliderValue}
+                  onChange={handleSliderChange}
                   onClick={handleProgressBarClick}
                   sx={{
                     color: "#ccc",

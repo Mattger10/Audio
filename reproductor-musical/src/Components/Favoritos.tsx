@@ -56,7 +56,6 @@ const Favoritos: React.FunctionComponent<FavoritosProps> = ({
     } else {
       setFavoritos((prevFavoritos) => [...prevFavoritos, songName]);
     }
-    localStorage.setItem("favoritos", JSON.stringify(favoritos));
   };
 
   React.useEffect(() => {
@@ -73,31 +72,31 @@ const Favoritos: React.FunctionComponent<FavoritosProps> = ({
   if (cancionesFavoritas.length === 0) {
     return (
       <Box
-  sx={{
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    textAlign: "center",
-  }}
->
-  <Typography
-    sx={{
-      color: "white",
-      fontSize: "38px",
-    }}
-  >
-    No hay favoritos seleccionados
-    <HeartBrokenIcon
-      sx={{
-        fontSize: "38px",
-        color: "#ffee04",
-        verticalAlign: "middle",
-        paddingLeft: "10px"
-      }}
-    />
-  </Typography>
-</Box>
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          textAlign: "center",
+        }}
+      >
+        <Typography
+          sx={{
+            color: "white",
+            fontSize: "38px",
+          }}
+        >
+          No hay favoritos seleccionados
+          <HeartBrokenIcon
+            sx={{
+              fontSize: "38px",
+              color: "#ffee04",
+              verticalAlign: "middle",
+              paddingLeft: "10px",
+            }}
+          />
+        </Typography>
+      </Box>
     );
   } else {
     return (

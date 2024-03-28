@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Reproductor from "./Components/Reproductor";
 import ReproductorArtists from "./Components/ReproductorArtists";
 import PagRockNacional from "./Components/PagRockNacional";
@@ -41,10 +41,14 @@ const App: React.FC = () => {
   );
   const [showReproductor, setShowReproductor] = useState(false);
   const [, setSelectedSong] = useState<string>("");
-  const [favoritos] = useState<string[]>(() => {
+  const [favoritos, setFavoritos] = useState<string[]>(() => {
     const storedFavoritos = localStorage.getItem("favoritos");
     return storedFavoritos ? JSON.parse(storedFavoritos) : [];
   });
+
+  useEffect(() => {
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+  }, [favoritos]);
 
   const [, setShowReproductorArtists] = useState(false);
   const [, setShowReproductorRock] = useState(false);

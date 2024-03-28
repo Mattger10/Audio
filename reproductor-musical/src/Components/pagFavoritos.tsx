@@ -10,12 +10,7 @@ interface PagFavoritosProps {
 const PagFavoritos: FunctionComponent<PagFavoritosProps> = ({
   handleSelect,
 }) => {
-  // const [mostrarTabla, setMostrarTabla] = useState(true);
-
-  // const alternarMostrarTabla = () => {
-  //   setMostrarTabla((prevShowTable) => !prevShowTable);
-  // };
-
+  
   return (
     <Container>
       <Favoritos mostrarTabla={true} handleSelect={handleSelect} />
