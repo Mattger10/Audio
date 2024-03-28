@@ -29,7 +29,7 @@ const ReproductorFavoritos: React.FC<ReproductorFavoritosProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const [currentTime, setCurrentTime] = useState(0);
+  const [, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [sliderValue, setSliderValue] = useState(0);
   const [isShuffleMode, setIsShuffleMode] = useState(false);

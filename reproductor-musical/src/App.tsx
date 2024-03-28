@@ -41,7 +41,7 @@ const App: React.FC = () => {
   );
   const [showReproductor, setShowReproductor] = useState(false);
   const [, setSelectedSong] = useState<string>("");
-  const [favoritos, setFavoritos] = useState<string[]>(() => {
+  const [favoritos, ] = useState<string[]>(() => {
     const storedFavoritos = localStorage.getItem("favoritos");
     return storedFavoritos ? JSON.parse(storedFavoritos) : [];
   });
