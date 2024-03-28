@@ -153,7 +153,7 @@ const App: React.FC = () => {
   
 
       <Routes>
-        <Route path="/" element={<Artistas />} />
+        <Route path="" element={<Artistas />} />
         <Route
           path="artistas/:id"
           element={
