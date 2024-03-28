@@ -10,13 +10,12 @@ import ReproductorFavoritos from "./Components/ReproductorFavoritos";
 import rocknacional from "./Components/Rocknacional.json";
 import recommended from "./Components/recommended.json";
 import artistas from "./Components/artists.json";
-import PagSearch from "./Components/pagSearch";
 import Recommended from "./Components/recommended";
 import ResponsiveAppBar from "./Components/ResponsiveAppBar";
 import Artistas from "./Components/artist-slider";
 import ArtistasDetails from "./Components/ArtistDetails";
 import styled from "styled-components";
-
+import SearchResults from "./Components/SearchResults";
 
 interface Song {
   songName: string;
@@ -34,7 +33,6 @@ interface Data {
   name?: string;
   bio?: string;
   photo_url?: string;
-
 }
 
 const App: React.FC = () => {
@@ -43,23 +41,21 @@ const App: React.FC = () => {
   );
   const [showReproductor, setShowReproductor] = useState(false);
   const [, setSelectedSong] = useState<string>("");
-  const [favoritos, ] = useState<string[]>(() => {
+  const [favoritos] = useState<string[]>(() => {
     const storedFavoritos = localStorage.getItem("favoritos");
     return storedFavoritos ? JSON.parse(storedFavoritos) : [];
   });
 
   const [, setShowReproductorArtists] = useState(false);
   const [, setShowReproductorRock] = useState(false);
-  const [, setShowReproductorRecommended] =
-    useState(false);
+  const [, setShowReproductorRecommended] = useState(false);
   const [mostrarReproductorFavoritos, setMostrarReproductorFavoritos] =
     useState(false);
   const [, setCurrentSong] = useState<Song | null>(null);
 
-  const allData: Data[] = [...rocknacional, ...recommended, ...artistas];
-  const [, setSearchResults] = useState<Data[]>(allData);
+  const allData: Data[] = [...artistas, ...recommended, ...rocknacional];
+  const [searchResults, setSearchResults] = useState<Data[]>(allData);
   const [searchTerm, setSearchTerm] = useState("");
-
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
@@ -67,24 +63,29 @@ const App: React.FC = () => {
       setSearchResults(allData); // Mostrar todos los datos sin filtrar
       return;
     }
-  
+
     // Conjunto para realizar un seguimiento de los nombres de las canciones únicas
     const uniqueSongNames = new Set<string>();
-  
+
     // Filtrar todas las canciones que coincidan con el término de búsqueda en todos los datos
     const matchedSongs: Song[] = [];
-  
-    allData.forEach(data => {
-      data.songs.forEach(song => {
+
+    allData.forEach((data) => {
+      data.songs.forEach((song) => {
         const lowerCaseSongName = song.songName.toLowerCase();
         const lowerCaseArtista = song.artista?.toLowerCase() || "";
-        const lowerCaseArtistsEvolved = song.artists_evolved?.map(artist => artist.toLowerCase()) || [];
+        const lowerCaseArtistsEvolved =
+          song.artists_evolved?.map((artist) => artist.toLowerCase()) || [];
         const searchTermLower = term.toLowerCase();
-  
-        const isArtistEvolvedMatch = lowerCaseArtistsEvolved.some(artist => artist.includes(searchTermLower));
-  
+
+        const isArtistEvolvedMatch = lowerCaseArtistsEvolved.some((artist) =>
+          artist.includes(searchTermLower)
+        );
+
         if (
-          (lowerCaseSongName.includes(searchTermLower) || lowerCaseArtista.includes(searchTermLower) || isArtistEvolvedMatch) &&
+          (lowerCaseSongName.includes(searchTermLower) ||
+            lowerCaseArtista.includes(searchTermLower) ||
+            isArtistEvolvedMatch) &&
           !uniqueSongNames.has(lowerCaseSongName)
         ) {
           uniqueSongNames.add(lowerCaseSongName); // Agregar el nombre de la canción al conjunto de canciones únicas
@@ -92,13 +93,15 @@ const App: React.FC = () => {
         }
       });
     });
-  
+
     // Construir los resultados de búsqueda combinando las canciones coincidentes con sus datos respectivos
-    const combinedResults: Data[] = allData.map(data => ({
-      ...data,
-      songs: data.songs.filter(song => matchedSongs.includes(song))
-    })).filter(data => data.songs.length > 0);
-  
+    const combinedResults: Data[] = allData
+      .map((data) => ({
+        ...data,
+        songs: data.songs.filter((song) => matchedSongs.includes(song)),
+      }))
+      .filter((data) => data.songs.length > 0);
+
     setSearchResults(combinedResults);
   };
 
@@ -146,7 +149,9 @@ const App: React.FC = () => {
   return (
     <div>
       <Img />
-      <ResponsiveAppBar searchTerm={searchTerm} onSearch={handleSearch}/>
+      <ResponsiveAppBar searchTerm={searchTerm} onSearch={handleSearch} />
+
+  
 
       <Routes>
         <Route path="/" element={<Artistas />} />
@@ -164,21 +169,22 @@ const App: React.FC = () => {
           element={<PagRockNacional handleSelectSong={handleSelectSong} />}
         />
         <Route
+          path="/search"
+          element={
+            <SearchResults
+              searchResults={searchResults}
+              handleSelect={handleSelect}
+              handleSelectSong={handleSelectSong}
+            />
+          }
+        />
+        <Route
           path="/exitos"
           element={<Recommended handleSelectSong={handleSelectSong} />}
         />
         <Route
           path="/favoritos"
           element={<PagFavoritos handleSelect={handleSelect} />}
-        />
-        <Route
-          path="/search"
-          element={
-            <PagSearch
-              handleSelect={handleSelect}
-              handleSelectSong={handleSelectSong}
-            />
-          }
         />
       </Routes>
       {(location.pathname === "/" ||
@@ -191,10 +197,7 @@ const App: React.FC = () => {
         showReproductor &&
         cancionesFavoritas && (
           <div>
-            <Reproductor
-              seleccionar={seleccionarCancion}
-              onClose={handleCloseReproductor}
-            />
+            <Reproductor seleccionar={seleccionarCancion} />
 
             <ReproductorArtists seleccionar={seleccionarCancion} />
 
@@ -230,11 +233,11 @@ export default App;
 const Img = styled("div")(() => ({
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
-  backgroundColor: "#111111",
+  backgroundColor: "#151829",
   position: "fixed",
   top: 0,
   left: 0,
-  width: "100vw",
-  height: "100vh",
+  width: "100%",
+  height: "100%",
   zIndex: "-9999",
 }));

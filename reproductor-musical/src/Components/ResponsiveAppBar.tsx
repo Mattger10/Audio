@@ -45,7 +45,7 @@ const ResponsiveAppBar: FunctionComponent<ResponsiveAppBarProps> = ({ searchTerm
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#303030", }}>
+    <AppBar position="static" sx={{ backgroundColor: "#0b0c17" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -108,12 +108,15 @@ const ResponsiveAppBar: FunctionComponent<ResponsiveAppBarProps> = ({ searchTerm
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
+            <Link to="/search">
             <StyledInputBase
               placeholder="Buscar..."
               inputProps={{ "aria-label": "search" }}
               value={searchTerm}
               onChange={handleChange}
-            />
+              sx={{color: "#ccc"}}
+              />
+              </Link>
           </Search>
         </Toolbar>
       </Container>

@@ -1,7 +1,7 @@
 import {  styled } from "@mui/material";
 import { FunctionComponent, } from "react";
-
 import Favoritos from "./Favoritos";
+
 
 interface PagFavoritosProps {
   handleSelect: (song: string) => void;

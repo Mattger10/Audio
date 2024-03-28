@@ -10,22 +10,22 @@ import { Typography, styled, Button, Box } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import artistas from "./artists.json";
 
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
-
 interface MusicTableProps {
   seleccionar: string;
   handleSelectSong: (song: string, url: string, index: number) => void;
+  playAll: boolean;
+  showFavorites: boolean; // Añade esta línea
 }
 
 const MusicTable: React.FunctionComponent<MusicTableProps> = ({
   seleccionar,
   handleSelectSong,
+  playAll,
+  showFavorites,
 }) => {
   const seleccionarArtista = artistas.find(
     (songs) => songs.name === seleccionar
@@ -41,7 +41,7 @@ const MusicTable: React.FunctionComponent<MusicTableProps> = ({
     const storedFavoritos = localStorage.getItem("favoritos");
     return storedFavoritos ? JSON.parse(storedFavoritos) : [];
   });
-  const [showFavorites, setShowFavorites] = React.useState(false);
+  // const [, setShowFavorites] = React.useState(false);
   const filteredRows = showFavorites
     ? rows.filter((row) => favoritos.includes(row.songName))
     : rows;
@@ -56,11 +56,6 @@ const MusicTable: React.FunctionComponent<MusicTableProps> = ({
     }
   };
 
-  const handleToggleShowFavorites = () => {
-    // Cambiar el estado para mostrar todas las canciones o solo las favoritas
-    setShowFavorites((prevState) => !prevState);
-  };
-
   React.useEffect(() => {
     // Guardar el estado de favoritos en el localStorage al actualizarlo
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
@@ -69,104 +64,25 @@ const MusicTable: React.FunctionComponent<MusicTableProps> = ({
   const handlePlayPause = (url: string, song: string, index: number) => {
     handleSelectSong(song, url, index);
     setShowReproductor(true);
-    // console.log("Artista seleccionado:", song);
-    // if (!audioRef.current) return;
-
-    // if (audioRef.current.paused || audioRef.current.src !== url) {
-    //   audioRef.current.src = url;
-    //   audioRef.current.play();
-    // } else {
-    //   audioRef.current.pause();
-    // }
   };
 
-  if (seleccionarArtista) {
-    if (filteredRows.length === 0) {
-      return (
-        <CajaFavoritos>
-          {rows.map((row, index) => {
-            return index < 1 ? (
-              <Button
-                onClick={() =>
-                  handlePlayPause(row.song_url, row.songName, index)
-                }
-                sx={{
-                  position: "absolute",
-                  border: "2px solid #ed215e",
-                  backgroundColor: "#ed215e",
-                  color: "white",
-                  padding: "4px 30px 4px 30px",
-                  marginLeft: "15rem",
-                  marginTop: "-9.5rem",
-                  borderRadius: "30px",
-
-                  ":hover": {
-                    backgroundColor: "#ed215e",
-                    boxShadow: "1px 1px 10px 2px #ed215e",
-                  },
-                }}
-              >
-                <VolumeUpIcon
-                  fontSize="small"
-                  sx={{ marginRight: "10px", marginLeft: "-0.5rem" }}
-                />{" "}
-                PLAY ALL
-              </Button>
-            ) : null;
-          })}
-          <Button
-            sx={{
-              position: "absolute",
-              border: "2px solid #ed215e",
-              backgroundColor: showFavorites ? "#ed215e" : "transparent",
-              color: "white",
-              padding: "5px 5px 5px 5px",
-              marginLeft: "25rem",
-              marginTop: "-9.5rem",
-              borderRadius: "50px",
-              borderRadiusTop: "30px",
-
-              ":hover": {
-                backgroundColor: "#ed215e",
-                boxShadow: "1px 1px 10px 2px #ed215e",
-              },
-            }}
-            onClick={handleToggleShowFavorites}
-            color={showFavorites ? "success" : "error"}
-          >
-            <FavoriteBorderIcon />
-          </Button>
-          <Typography
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              color: "white",
-              fontSize: "38px",
-              marginTop: "7rem",
-              fontFamily: "font2",
-            }}
-          >
-            No hay favoritos seleccionados{" "}
-            <HeartBrokenIcon
-              sx={{
-                position: "absolute",
-                fontSize: "38px",
-                marginTop: "0.6rem",
-                marginLeft: "38rem",
-                color: "#ed215e",
-              }}
-            />
-          </Typography>
-        </CajaFavoritos>
-      );
+  React.useEffect(() => {
+    if (playAll) {
+      rows.map((song, index) => {
+        setTimeout(() => {
+          handlePlayPause(song.song_url, song.songName, index);
+        }); // Cambia este valor según tu preferencia para el intervalo de reproducción
+      });
     }
+  }, [playAll]);
 
+  if (seleccionarArtista) {
     return (
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
-          paddingBottom: "5rem",
+          paddingBottom: "10rem",
           marginTop: "2rem",
         }}
       >
@@ -207,7 +123,7 @@ const MusicTable: React.FunctionComponent<MusicTableProps> = ({
 
             <TableBody>
               {filteredRows.map((row, index) => {
-                return verTodasLasCanciones || index < 10 ? (
+                return verTodasLasCanciones || index < 20 ? (
                   <TableRow
                     key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -243,7 +159,7 @@ const MusicTable: React.FunctionComponent<MusicTableProps> = ({
                               marginLeft: "1.5rem",
                               color: "#ccc",
                               cursor: "pointer",
-                              fontSize: 20,
+                              fontSize: "20px",
                             }}
                             onClick={() => handleToggleFavorito(row.songName)}
                           />
@@ -252,7 +168,7 @@ const MusicTable: React.FunctionComponent<MusicTableProps> = ({
                           sx={{
                             marginLeft: "2rem",
                             cursor: "pointer",
-                            fontSize: 20,
+                            fontSize: "22px",
                             color: "white",
                             "&:hover": {
                               color: "#ffee04", // Cambiar el color a tu preferencia cuando el cursor esté sobre el ícono
@@ -287,8 +203,8 @@ const MusicTable: React.FunctionComponent<MusicTableProps> = ({
             </TableBody>
           </Table>
 
-          <ContainerButton>
-            {songs.length > 5 ? (
+          {songs.length > 20 && (
+            <ContainerButton>
               <StyledButton
                 onClick={() => setVerTodasLasCanciones(!verTodasLasCanciones)}
                 sx={{ marginTop: "1rem" }}
@@ -319,11 +235,8 @@ const MusicTable: React.FunctionComponent<MusicTableProps> = ({
                   </Typography>
                 )}
               </StyledButton>
-            ) : null}
-            {/* {showReproductor && seleccionarCancion && (
-        <ReproductorArtists seleccionar={seleccionarCancion} />
-      )} */}
-          </ContainerButton>
+            </ContainerButton>
+          )}
         </TableContainer>
       </Box>
     );
@@ -334,9 +247,7 @@ const MusicTable: React.FunctionComponent<MusicTableProps> = ({
 
 export default MusicTable;
 
-const ImgIcon = styled("img")(() => ({
-
-}));
+const ImgIcon = styled("img")(() => ({}));
 
 const StyledButton = styled(Button)(() => ({
   color: "#fff",
@@ -348,8 +259,4 @@ const StyledButton = styled(Button)(() => ({
 const ContainerButton = styled("div")(() => ({
   display: "flex",
   justifyContent: "center",
-}));
-
-const CajaFavoritos = styled("div")(() => ({
-  marginBottom: "10rem",
 }));

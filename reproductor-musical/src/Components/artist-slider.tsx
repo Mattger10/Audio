@@ -9,7 +9,7 @@ interface ArtistasProps {
 
 const Artistas: FunctionComponent<ArtistasProps> = () => {
   return (
-    <Box sx={{ marginBottom: "5rem" }}>
+    <Box sx={{ marginBottom: "10rem" }}>
       <StyledUlContainer>
         <StyledUl>
           {artistas.slice(0, 20).map((artista, index) => (
@@ -79,7 +79,7 @@ const StyledUl = styled("ul")({
 });
 
 const StyledLi = styled("li")({
-  backgroundColor: "#303030",
+  backgroundColor: "#0b0c17",
   width: "20rem",
   height: "25rem",
   ":hover": {

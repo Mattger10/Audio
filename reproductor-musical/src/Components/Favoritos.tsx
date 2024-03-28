@@ -32,9 +32,7 @@ interface FavoritosProps {
 
 const Favoritos: React.FunctionComponent<FavoritosProps> = ({
   handleSelect,
- 
 }) => {
-
   const [favoritos, setFavoritos] = React.useState<string[]>(() => {
     const storedFavoritos = localStorage.getItem("favoritos");
     return storedFavoritos ? JSON.parse(storedFavoritos) : [];
@@ -65,36 +63,41 @@ const Favoritos: React.FunctionComponent<FavoritosProps> = ({
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
   }, [favoritos]);
 
-  const [, setMostrarReproductorFavoritos] =
-    React.useState(false);
+  const [, setMostrarReproductorFavoritos] = React.useState(false);
 
   const handlePlayPause = (song: string) => {
     handleSelect(song);
     setMostrarReproductorFavoritos(true);
   };
 
-
   if (cancionesFavoritas.length === 0) {
     return (
-      <Typography
-        sx={{
-          color: "white",
-          fontSize: "38px",
-          marginTop: "20rem",
-          fontFamily: "font2",
-        }}
-      >
-        No hay favoritos seleccionados
-        <HeartBrokenIcon
-          sx={{
-            position: "absolute",
-            fontSize: "38px",
-            marginTop: "0.6rem",
-            marginLeft: "1rem",
-            color: "#ed215e",
-          }}
-        />
-      </Typography>
+      <Box
+  sx={{
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    textAlign: "center",
+  }}
+>
+  <Typography
+    sx={{
+      color: "white",
+      fontSize: "38px",
+    }}
+  >
+    No hay favoritos seleccionados
+    <HeartBrokenIcon
+      sx={{
+        fontSize: "38px",
+        color: "#ffee04",
+        verticalAlign: "middle",
+        paddingLeft: "10px"
+      }}
+    />
+  </Typography>
+</Box>
     );
   } else {
     return (
@@ -104,6 +107,7 @@ const Favoritos: React.FunctionComponent<FavoritosProps> = ({
           justifyContent: "center",
           paddingBottom: "5rem",
           marginTop: "2rem",
+          marginBottom: "10rem",
         }}
       >
         <TableContainer
