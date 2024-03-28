@@ -14,6 +14,7 @@ import Artistas from "./Components/artist-slider";
 import ArtistasDetails from "./Components/ArtistDetails";
 import styled from "styled-components";
 import SearchResults from "./Components/SearchResults";
+import PagFavoritos from "./Components/pagFavoritos";
 
 interface Song {
   songName: string;
